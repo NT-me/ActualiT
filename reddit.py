@@ -1,5 +1,7 @@
 import feedparser as fp
 import json
+import asyncio
+import purifier 
 
 PATH_FileRes = "redditRES.json"
 def TxtToList(f):

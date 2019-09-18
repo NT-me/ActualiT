@@ -6,6 +6,7 @@ import feed
 import reddit
 import twitter
 import re
+import utils as u
 
 def parse(nom_file):
 	#Parse du fichier et transormation en dico
@@ -30,29 +31,48 @@ PATH_FileFEED = feed.PATH_FileRes
 #Fichier de source de reddit
 PATH_FileREDDIT = reddit.PATH_FileRes
 
+#Fichier de source de twitter
+PATH_FileTWEET = twitter.PATH_FileRes
+
 #Fichie de sortie
 PATH_OutFile = "mainCol.json"
 db = TinyDB(PATH_OutFile)
 
+print("--=Start ask=--")
+
+print("--=Start NAC=--")
 #Ask newsAPI
 napi.askNAC()
+print("--=End NAC=--")
 
+print("--=Start feed=--")
 #Ask feed
 feed.askFeeds()
+print("--=End feed=--")
 
+print("--=Start reddit=--")
 #Ask reddit
 reddit.askReddit()
+print("--=End reddit=--")
+
+print("--=Start twitter=--")
+#Ask twitter
+twitter.askTwitter()
+print("--=End twitter=--")
+
+print("--=End ask=--")
 
 # Parse les fichiers sources
 articleNA=parse(PATH_FileNA)
 articleFEED=parse(PATH_FileFEED)
 articleREDDIT=parse(PATH_FileREDDIT)
+articleTWEET=parse(PATH_FileTWEET)
 
 #Forme d'un article dans la DB article
 # ID
 # Titre
 # Auteur
-# Nom du journal
+# info_source
 # Lien
 # Resumé
 # Lien image
@@ -60,27 +80,27 @@ articleREDDIT=parse(PATH_FileREDDIT)
 
 titre = None
 auteur = None
-nom_Du_Journal = None
+info_source = None
 lien = None
 resume = None
 lien_img = None
 date = None
-source = None
+module_source = None
 
 print("===- News API START -===")
 for item in articleNA["articles"]:
 	titre = item["title"]
 	auteur = item["author"]
-	nom_Du_Journal = item["source"]["name"]
+	info_source = item["source"]["name"]
 	lien = item["url"]
 	resume = item["content"]
 	lien_img = item["urlToImage"]
-	date = item["publishedAt"]
-	source = item["from"]
+	date = u.convert_time(item["publishedAt"])
+	module_source = item["from"]
 	if db.search(Query().Titre == titre) == []:
 		ID = hash(titre)
-		db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "Nom du journal":nom_Du_Journal,
-		"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "source":source})
+		db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
+		"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
 print("===- News Api OK -===")
 
 print("===- Feed START -===")
@@ -92,7 +112,7 @@ for i in articleFEED:
 		except:
 			auteur = None
 			print("F Pas d'auteur trouvé")
-		nom_Du_Journal = item["from"]
+		info_source = item["source"]
 		lien = item["link"]
 		resume = item["summary"]
 		try :
@@ -101,11 +121,11 @@ for i in articleFEED:
 			lien_img = None
 			print("F Pas d'image trouvée")
 		date = item["published"]
-		source = item["from"]
+		module_source = item["from"]
 		if db.search(Query().Titre == titre) == []:
 			ID = hash(titre)
-			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "Nom du journal":nom_Du_Journal,
-			"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "source":source})
+			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
+			"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
 print("===- Feed OK -===")
 
 print("==- Reddit START -==")
@@ -117,14 +137,41 @@ for i in articleREDDIT:
 		except:
 			auteur = None
 			print("Pas d'auteur trouvé")
-		nom_Du_Journal = item["tags"][0]["label"]
+		info_source = item["tags"][0]["label"]
 		lien = item["link"]
 		resume = withoutHTML(item["summary"])
 		lien_img = None
-		date = item["updated"]
-		source = item["from"]
+		date = u.convert_time(item["updated"])
+		module_source = item["from"]
 		if db.search(Query().Titre == titre) == []:
 			ID = hash(titre)
-			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "Nom du journal":nom_Du_Journal,
-			"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "source":source})
+			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
+			"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
 print("===- Reddit OK -===")
+
+print("==- Twitter START -==")
+for i in articleTWEET:
+	item = articleTWEET[i]
+	titre = "Tweet de "+item["author"]
+	try :
+		titre = titre +"-"+ item["entries"]["hashtags"][0]
+	except:
+		print("Pas de #")
+	auteur = item["author"]
+	info_source = item["from"]
+	lien = "https://www.twitter.com/home/"+item["tweetId"]
+	resume = item["text"]
+	try :
+		lien_img = item["entries"]["photos"][0]
+	except:
+		try:
+			lien_img = item["entries"]["videos"][0]
+		except:
+			lien_img = None
+	date = item["time"]
+	module_source = item["from"]
+	if db.search(Query().Titre == titre) == []:
+		ID = hash(titre)
+		db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
+		"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
+print("===- Twitter OK -===")

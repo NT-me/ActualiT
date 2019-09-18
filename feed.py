@@ -1,5 +1,6 @@
 import feedparser as fp
 import json
+from time import mktime
 
 PATH_FileRes = "feedRES.json"
 def TxtToList(f):
@@ -16,9 +17,9 @@ def TxtToList(f):
 	f.close()
 	return res
 #Liste des feeds
-FILE_liste = open("feed_list.txt","r")
 
 def askFeeds():
+	FILE_liste = open("feed_list.txt","r")
 	liste = TxtToList(FILE_liste)
 	res = dict()
 	inc = 0
@@ -29,7 +30,9 @@ def askFeeds():
 		res[inc]=parse
 		# Ajoute la provenance à chaque article
 		for article in res[inc]:
-			article["from"]=item
+			article["from"]="Feed RSS"
+			article["source"]=item
+			article["published"] = mktime(article["published_parsed"])
 		inc = inc + 1
 
 	with open(PATH_FileRes, 'w') as f:
