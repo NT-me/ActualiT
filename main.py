@@ -16,6 +16,14 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.buttonClicked)
 
+    def buttonClicked(self):
+        a = mainCol.gen_mainCol()
+        if a == 0:
+            self.statusBar().showMessage('Accomplit avec succès')
+        else:
+            self.statusBar().showMessage('Erreur')
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     w = GUIActualiT()
