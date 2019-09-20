@@ -54,7 +54,7 @@ def all_ask():
 def all_parse():
 
 	# Fichier de sortie
-	PATH_OutFile = "mainCol.json"
+	PATH_OutFile = u.PATH_DB
 	db = TinyDB(PATH_OutFile)
 	# Fichier de source de newsAPI
 	PATH_FileNA = napi.PATH_FileRes

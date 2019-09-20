@@ -3,7 +3,9 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import dbToList as dbl
 import mainCol
+import time
 
 from GUI.mainwindow import Ui_MainWindow
 import sys
@@ -20,6 +22,10 @@ class GUIActualiT(QtWidgets.QMainWindow):
         a = mainCol.gen_mainCol()
         if a == 0:
             self.statusBar().showMessage('Accomplit avec succès')
+            liste = dbl.sortMainCol()
+            for item in liste:
+                self.ui.mainCol.addItem(str(item.titre)+' | '+str(time.ctime(item.date)))
+
         else:
             self.statusBar().showMessage('Erreur')
 
