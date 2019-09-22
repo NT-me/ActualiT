@@ -8,6 +8,7 @@ import twitter
 import re
 import utils as u
 
+
 def parse(nom_file):
 	#Parse du fichier et transormation en dico
 	File = open(nom_file,"r")
@@ -17,10 +18,13 @@ def parse(nom_file):
 
 	return article
 
+
 def withoutHTML(string):
 	string = re.sub("<[^>]+>","",string)
 
 	return string
+
+
 def all_ask():
 	#Fichie de sortie
 	PATH_OutFile = "mainCol.json"
@@ -103,7 +107,7 @@ def all_parse():
 		module_source = item["from"]
 		if db.search(Query().Titre == titre) == []:
 			ID = hash(titre)
-			db.insert({"ID":ID, "Titre": titre, "Auteur": auteur, "info_source": info_source,
+			db.insert({"ID": ID, "Titre" : titre, "Auteur" : auteur, "info_source": info_source,
 			"Lien": lien, "Contenu": resume, "URL_image": lien_img, "Publication": date, "module_source": module_source})
 	print("===- News Api OK -===")
 

@@ -1,4 +1,4 @@
-import twitter_scraper as ts
+from twitter_scraper import tweets as ts
 import json
 import utils as u
 
@@ -19,6 +19,7 @@ def TxtToList(f):
 	return res
 
 
+
 def askTwitter():
 	#Liste des tweet
 	FILE_liste = open("twitter_list.txt","r")
@@ -29,6 +30,7 @@ def askTwitter():
 
 	#Parcours la liste de source
 	for item in liste:
+		print(item)
 		parse = ts.get_tweets(item, pages=1)
 		for tweet in parse:
 			res[inc]=tweet

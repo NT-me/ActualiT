@@ -34,4 +34,4 @@ def sortMainCol():
         ListA.append(Article(artDB["ID"], artDB["Titre"], artDB["Auteur"], artDB["info_source"], artDB["Lien"], artDB["Contenu"], artDB["URL_image"], artDB["Publication"], artDB["module_source"]))
         i += 1
 
-    return sorted(ListA, key=getDate)
+    return sorted(ListA, key=getDate, reverse=True)

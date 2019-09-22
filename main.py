@@ -3,6 +3,8 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+import qtmodern.styles
+import qtmodern.windows
 import dbToList as dbl
 import mainCol
 import time
@@ -32,6 +34,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    qtmodern.styles.dark(app)
     w = GUIActualiT()
     w.show()
     sys.exit(app.exec_())
