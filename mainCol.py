@@ -47,10 +47,8 @@ def all_ask():
 	reddit.askReddit()
 	print("--=End reddit=--")
 
-	print("--=Start twitter=--")
 	#Ask twitter
 	twitter.askTwitter()
-	print("--=End twitter=--")
 
 	print("--=End ask=--")
 
