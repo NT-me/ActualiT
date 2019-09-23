@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.mainCol = QtWidgets.QListWidget(self.centralwidget)
-        self.mainCol.setStyleSheet("")
+        self.mainCol.setStyleSheet("font: 15pt \"Montserrat\";")
         self.mainCol.setObjectName("mainCol")
         self.horizontalLayout.addWidget(self.mainCol)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)

@@ -21,7 +21,7 @@
     <item>
      <widget class="QListWidget" name="mainCol">
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">font: 20pt &quot;Montserrat&quot;;</string>
       </property>
      </widget>
     </item>
