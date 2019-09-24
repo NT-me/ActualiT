@@ -8,9 +8,25 @@ import qtmodern.windows
 import dbToList as dbl
 import mainCol
 import time
+from threading import Thread
 
 from GUI.mainwindow import Ui_MainWindow
 import sys
+
+
+class MainColWork(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+
+    def run(self):
+        mainCol.gen_mainCol()
+
+
+def MainColWorkFunc():
+    MCW = MainColWork()
+    MCW.deamon = False
+    MCW.start()
+    MCW.join()
 
 
 class GUIActualiT(QtWidgets.QMainWindow):

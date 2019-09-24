@@ -7,6 +7,7 @@ import reddit
 import twitter
 import re
 import utils as u
+from threading import Thread
 
 
 def parse(nom_file):
@@ -25,31 +26,73 @@ def withoutHTML(string):
 	return string
 
 
+class NACWork(Thread):
+	def __init__(self):
+		Thread.__init__(self)
+
+	def run(self):
+		print("--=Start NAC=--")
+		napi.askNAC()
+		print("--=End NAC=--")
+
+
+
+class FeedWork(Thread):
+	def __init__(self):
+		Thread.__init__(self)
+
+	def run(self):
+		print("--=Start feed=--")
+		feed.askFeeds()
+		print("--=End feed=--")
+
+
+class RedditWork(Thread):
+	def __init__(self):
+		Thread.__init__(self)
+
+	def run(self):
+		print("--=Start reddit=--")
+		reddit.askReddit()
+		print("--=End reddit=--")
+
+
+class TwitterWork(Thread):
+	def __init__(self):
+		Thread.__init__(self)
+
+	def run(self):
+		twitter.askTwitter()
+
+
 def all_ask():
-	#Fichie de sortie
+	# Fichie de sortie
 	PATH_OutFile = "mainCol.json"
-	db = TinyDB(PATH_OutFile)
+
+	# Déclaration des threads
+	thread_NAC = NACWork()
+	thread_Feed = FeedWork()
+	thread_Reddit = RedditWork()
+	thread_Twitter = TwitterWork()
 
 	print("--=Start ask=--")
 
-	print("--=Start NAC=--")
-	#Ask newsAPI
-	napi.askNAC()
-	print("--=End NAC=--")
+	# Ask newsAPI
+	thread_NAC.start()
 
-	print("--=Start feed=--")
-	#Ask feed
-	feed.askFeeds()
-	print("--=End feed=--")
+	# Ask feed
+	thread_Feed.start()
 
-	print("--=Start reddit=--")
-	#Ask reddit
-	reddit.askReddit()
-	print("--=End reddit=--")
+	# Ask reddit
+	thread_Reddit.start()
 
-	#Ask twitter
-	twitter.askTwitter()
+	# Ask twitter
+	thread_Twitter.start()
 
+	thread_NAC.join()
+	thread_Feed.join()
+	thread_Reddit.join()
+	thread_Twitter.join()
 	print("--=End ask=--")
 
 

@@ -1,9 +1,7 @@
-from twitter_scraper import tweets as ts
-import json
+from tweetscrape.profile_tweets import TweetScrapperProfile as ts
 import utils as u
 from threading import Thread
 from queue import Queue
-import random as r
 
 PATH_FileRes = "tweetRES.json"
 
@@ -25,26 +23,15 @@ def TxtToList(f):
 
 
 class TwitterWork(Thread):
-	def __init__(self, queueIn, queueOut):
+	def __init__(self, queueIn):
 		Thread.__init__(self)
 		self.queueIn = queueIn
-		self.queueOut = queueOut
 
 	def run(self):
 		while True:
-			res = dict()
-			inc = r.randint(0, 1000)
 			item = self.queueIn.get()
-			parse = ts.get_tweets(item, pages=1)
-			for tweet in parse:
-				res[inc] = tweet
-				res[inc]["time"] = u.convert_time(res[inc]["time"])
-				res[inc]["from"] = "twitter"
-				res[inc]["author"] = item
-
-				inc = inc + 1
-
-			self.queueOut.put(res)
+			res = ts(item, 40, PATH_FileRes, "json")
+			res.get_profile_tweets()
 			self.queueIn.task_done()
 
 
@@ -52,13 +39,11 @@ class TwitterWork(Thread):
 def askTwitter():
 	print("--=Start twitter=--")
 	liste = TxtToList(open('twitter_list.txt'))
-	thread_count = 4
-	res = dict()
+	thread_count = len(liste)
 	queueIn = Queue()
-	queueOut = Queue()
 
 	for i in range(thread_count):
-		TW = TwitterWork(queueIn, queueOut)
+		TW = TwitterWork(queueIn)
 		TW.deamon = True
 		TW.start()
 
@@ -66,11 +51,4 @@ def askTwitter():
 		queueIn.put(compte)
 
 	queueIn.join()
-
-	while queueOut.empty() == False:
-		res = {**res, **queueOut.get()}
-	queueOut.task_done()
-
-	with open(PATH_FileRes, 'w') as f:
-		f.write(json.dumps(res, indent=4))
 	print("--=End twitter=--")
