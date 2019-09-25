@@ -200,15 +200,15 @@ def all_parse():
 
 	print("==- Twitter START -==")
 	for i in articleTWEET:
-		item = articleTWEET[i]
+		item = i
 		titre = "Tweet de "+item["author"]
 		try :
-			titre = titre +"-"+ item["entries"]["hashtags"][0]
+			titre = titre +"-"+ item["hashtags"][0]
 		except:
 			print("Pas de #")
 		auteur = item["author"]
-		info_source = item["from"]
-		lien = "https://www.twitter.com/home/"+item["tweetId"]
+		info_source = item["type"]
+		lien = "https://www.twitter.com/home/"+item["id"]
 		resume = item["text"]
 		try :
 			lien_img = item["entries"]["photos"][0]
@@ -217,8 +217,8 @@ def all_parse():
 				lien_img = item["entries"]["videos"][0]
 			except:
 				lien_img = None
-		date = item["time"]
-		module_source = item["from"]
+		date = int(item["time"])
+		module_source = "Twitter"
 		if db.search(Query().Titre == titre) == []:
 			ID = hash(titre)
 			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,

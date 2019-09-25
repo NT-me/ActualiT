@@ -28,7 +28,6 @@ class TwitterWork(Thread):
 		self.queueIn = queueIn
 
 	def run(self):
-		while True:
 			item = self.queueIn.get()
 			res = ts(item, 40, PATH_FileRes, "json")
 			res.get_profile_tweets()
