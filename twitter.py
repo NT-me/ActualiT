@@ -6,22 +6,6 @@ from queue import Queue
 PATH_FileRes = "tweetRES.json"
 
 
-def TxtToList(f):
-	"""
-	Permet de transformer un fichier txt en une liste python
-	"""
-	res = []
-
-	ligne = f.readline()
-	while ligne != "":
-		ligne = ligne.replace("\n", "")
-		res.append(ligne)
-		ligne = f.readline()
-	f.close()
-
-	return res
-
-
 class TwitterWork(Thread):
 	def __init__(self, queueIn):
 		Thread.__init__(self)
@@ -37,7 +21,7 @@ class TwitterWork(Thread):
 @u.MTime
 def askTwitter():
 	print("--=Start twitter=--")
-	liste = TxtToList(open('twitter_list.txt'))
+	liste = u.TxtToList(open('twitter_list.txt'))
 	thread_count = len(liste)
 	queueIn = Queue()
 

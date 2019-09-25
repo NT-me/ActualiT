@@ -13,7 +13,11 @@ from threading import Thread
 def parse(nom_file):
 	#Parse du fichier et transormation en dico
 	File = open(nom_file,"r")
-	article = json.loads(File.read())
+	article = dict()
+	try :
+		article = json.loads(File.read())
+	except :
+		pass
 	File.close()
 	os.remove(nom_file)
 

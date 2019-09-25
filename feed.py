@@ -1,30 +1,17 @@
 import feedparser as fp
 import json
 from time import mktime
+import utils as u
+
 
 PATH_FileRes = "feedRES.json"
 
 
-def TxtToList(f):
-	"""
-	Permet de transformer un fichier txt en une liste python
-	"""
-	res = []
-
-	ligne = f.readline()
-	while ligne != "":
-		ligne = ligne.replace("\n", "")
-		res.append(ligne)
-		ligne = f.readline()
-	f.close()
-	return res
-
-
 # Liste des feeds
-
 def askFeeds():
+
 	FILE_liste = open("feed_list.txt", "r")
-	liste = TxtToList(FILE_liste)
+	liste = u.TxtToList(FILE_liste)
 	res = dict()
 	inc = 0
 
