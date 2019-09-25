@@ -42,7 +42,8 @@ class GUIActualiT(QtWidgets.QMainWindow):
             self.statusBar().showMessage('Accomplit avec succès')
             liste = dbl.sortMainCol()
             for item in liste:
-                self.ui.mainCol.addItem(str(item.titre)+' | '+str(time.ctime(item.date)))
+                date = str(time.ctime(item.date))
+                self.ui.mainCol.addItem(str(item.titre)+' | '+date)
 
         else:
             self.statusBar().showMessage('Erreur')

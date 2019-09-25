@@ -11,12 +11,12 @@ from threading import Thread
 
 
 def parse(nom_file):
-	#Parse du fichier et transormation en dico
-	File = open(nom_file,"r")
+	# Parse du fichier et transormation en dico
+	File = open(nom_file, "r")
 	article = dict()
-	try :
+	try:
 		article = json.loads(File.read())
-	except :
+	except:
 		pass
 	File.close()
 	os.remove(nom_file)
@@ -25,7 +25,7 @@ def parse(nom_file):
 
 
 def withoutHTML(string):
-	string = re.sub("<[^>]+>","",string)
+	string = re.sub("<[^>]+>", "", string)
 
 	return string
 
@@ -38,7 +38,6 @@ class NACWork(Thread):
 		print("--=Start NAC=--")
 		napi.askNAC()
 		print("--=End NAC=--")
-
 
 
 class FeedWork(Thread):
@@ -70,9 +69,6 @@ class TwitterWork(Thread):
 
 
 def all_ask():
-	# Fichie de sortie
-	PATH_OutFile = "mainCol.json"
-
 	# Déclaration des threads
 	thread_NAC = NACWork()
 	thread_Feed = FeedWork()
@@ -116,11 +112,16 @@ def all_parse():
 
 	# Fichier de source de twitter
 	PATH_FileTWEET = twitter.PATH_FileRes
+
 	# Parse les fichiers sources
 	articleNA = parse(PATH_FileNA)
+
 	articleFEED = parse(PATH_FileFEED)
+
 	articleREDDIT = parse(PATH_FileREDDIT)
+
 	articleTWEET = parse(PATH_FileTWEET)
+
 	# Forme d'un article dans la DB article
 	# ID
 	# Titre
@@ -130,15 +131,6 @@ def all_parse():
 	# Resumé
 	# Lien image
 	# Date de publication
-
-	titre = None
-	auteur = None
-	info_source = None
-	lien = None
-	resume = None
-	lien_img = None
-	date = None
-	module_source = None
 
 	print("===- News API START -===")
 	for item in articleNA["articles"]:
@@ -221,7 +213,7 @@ def all_parse():
 				lien_img = item["entries"]["videos"][0]
 			except:
 				lien_img = None
-		date = int(item["time"])
+		date = int(item["time"][:10])
 		module_source = "Twitter"
 		if db.search(Query().Titre == titre) == []:
 			ID = hash(titre)

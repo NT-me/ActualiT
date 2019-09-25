@@ -22,16 +22,18 @@ class TwitterWork(Thread):
 def askTwitter():
 	print("--=Start twitter=--")
 	liste = u.TxtToList(open('twitter_list.txt'))
-	thread_count = len(liste)
-	queueIn = Queue()
-
-	for i in range(thread_count):
-		TW = TwitterWork(queueIn)
-		TW.deamon = True
-		TW.start()
-
-	for compte in liste:
-		queueIn.put(compte)
-
-	queueIn.join()
+	#thread_count = 1
+	#queueIn = Queue()
+	for item in liste:
+		res = ts(item, 40, PATH_FileRes, "json")
+		res.get_profile_tweets()
+	#for i in range(thread_count):
+	#	TW = TwitterWork(queueIn)
+	#	TW.deamon = True
+	#	TW.start()
+#
+#	for compte in liste:
+#		queueIn.put(compte)
+#
+#	queueIn.join()
 	print("--=End twitter=--")
