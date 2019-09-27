@@ -8,9 +8,12 @@ import qtmodern.windows
 import mainCol
 import time
 from threading import Thread
+from tinydb import TinyDB, Query
 
 from GUI.mainwindow import Ui_MainWindow
 import sys
+import utils as u
+db = TinyDB(u.PATH_DB)
 
 
 class MainColWork(Thread):
@@ -34,12 +37,34 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.buttonClicked)
+        self.ui.mainCol.itemClicked.connect(self.item_click)
 
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
         for item in liste:
             date = str(time.ctime(item.date))
-            self.ui.mainCol.addItem(str(item.titre)+' | '+date)
+            Qitem = QtWidgets.QListWidgetItem()
+            QV = QVariant(item.ID)
+            Qitem.setText(str(item.titre)+' | '+date)
+            Qitem.setData(Qt.UserRole, item.ID)
+            self.ui.mainCol.addItem(Qitem)
+
+    def item_click(self, item):
+        id = item.data(Qt.UserRole)
+        if id != 0:
+            article = db.search(Query().ID == id)
+            title = ''
+            contenu = ''
+            try:
+                title = article[0]["Titre"]
+            except TypeError :
+                title = 'Title is broken !'
+            try:
+                contenu = article[0]["Contenu"]
+            except TypeError:
+                contenu = ''
+
+            self.ui.articleShower.append('<h1>' + title + '</h1>' + '\n' + '<p>' + contenu + '</p>')
 
 
 if __name__ == "__main__":
