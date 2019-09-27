@@ -5,7 +5,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import qtmodern.styles
 import qtmodern.windows
-import dbToList as dbl
 import mainCol
 import time
 from threading import Thread
@@ -37,16 +36,10 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.buttonClicked)
 
     def buttonClicked(self):
-        a = mainCol.gen_mainCol()
-        if a == 0:
-            self.statusBar().showMessage('Accomplit avec succès')
-            liste = dbl.sortMainCol()
-            for item in liste:
-                date = str(time.ctime(item.date))
-                self.ui.mainCol.addItem(str(item.titre)+' | '+date)
-
-        else:
-            self.statusBar().showMessage('Erreur')
+        liste = mainCol.gen_mainCol()
+        for item in liste:
+            date = str(time.ctime(item.date))
+            self.ui.mainCol.addItem(str(item.titre)+' | '+date)
 
 
 if __name__ == "__main__":

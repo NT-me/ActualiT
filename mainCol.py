@@ -8,6 +8,7 @@ import twitter
 import re
 import utils as u
 from threading import Thread
+import dbToList as dbt
 
 
 def parse(nom_file):
@@ -223,4 +224,4 @@ def all_parse():
 def gen_mainCol():
 	all_ask()
 	all_parse()
-	return 0
+	return dbt.sortMainCol()
