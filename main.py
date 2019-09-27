@@ -44,7 +44,6 @@ class GUIActualiT(QtWidgets.QMainWindow):
         for item in liste:
             date = str(time.ctime(item.date))
             Qitem = QtWidgets.QListWidgetItem()
-            QV = QVariant(item.ID)
             Qitem.setText(str(item.titre)+' | '+date)
             Qitem.setData(Qt.UserRole, item.ID)
             self.ui.mainCol.addItem(Qitem)
@@ -57,14 +56,16 @@ class GUIActualiT(QtWidgets.QMainWindow):
             contenu = ''
             try:
                 title = article[0]["Titre"]
+                print(title)
             except TypeError :
                 title = 'Title is broken !'
             try:
                 contenu = article[0]["Contenu"]
+                print(title)
             except TypeError:
                 contenu = ''
-
-            self.ui.articleShower.append('<h1>' + title + '</h1>' + '\n' + '<p>' + contenu + '</p>')
+            self.ui.articleShower.clear()
+            self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
 
 
 if __name__ == "__main__":
