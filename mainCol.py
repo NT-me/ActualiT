@@ -164,7 +164,6 @@ def all_parse():
 				lien_img = item["links"][1]["href"]
 			except:
 				lien_img = None
-				print("F Pas d'image trouvée")
 			date = item["published"]
 			module_source = item["from"]
 			if db.search(Query().Titre == titre) == []:
@@ -181,7 +180,6 @@ def all_parse():
 				auteur = item["author"]
 			except:
 				auteur = None
-				print("Pas d'auteur trouvé")
 			info_source = item["tags"][0]["label"]
 			lien = item["link"]
 			resume = withoutHTML(item["summary"])
@@ -201,7 +199,7 @@ def all_parse():
 		try :
 			titre = titre +"-"+ item["hashtags"][0]
 		except:
-			print("Pas de #")
+			pass
 		auteur = item["author"]
 		info_source = item["type"]
 		lien = "https://www.twitter.com/home/"+item["id"]
