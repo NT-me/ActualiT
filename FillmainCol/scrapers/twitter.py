@@ -1,5 +1,5 @@
 from tweetscrape.profile_tweets import TweetScrapperProfile as ts
-import utils as u
+from . import utils as u
 from threading import Thread
 from queue import Queue
 
@@ -21,7 +21,7 @@ class TwitterWork(Thread):
 
 def askTwitter():
 	print("--=Start twitter=--")
-	liste = u.TxtToList(open('twitter_list.txt'))
+	liste = u.TxtToList(open('FillmainCol/scrapers/twitter_list.txt'))
 	thread_count = len(liste)
 	queueIn = Queue()
 	queueOut = Queue()

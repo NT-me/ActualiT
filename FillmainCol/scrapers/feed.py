@@ -1,28 +1,29 @@
 import feedparser as fp
 import json
-import utils as u
+from time import mktime
+from . import utils as u
 
-PATH_FileRes = "redditRES.json"
+
+PATH_FileRes = "feedRES.json"
 
 
-def askReddit():
-	# Liste des feeds
-	FILE_liste = open("reddit_list.txt", "r")
+# Liste des feeds
+def askFeeds():
+
+	FILE_liste = open("FillmainCol/scrapers/feed_list.txt", "r")
 	liste = u.TxtToList(FILE_liste)
 	res = dict()
 	inc = 0
 
 	# Parcours la liste de source
 	for item in liste:
-		if item[len(item)-1] == '/':
-			item = item[:len(item)-1]+".rss"
-		else:
-			item = item+".rss"
 		parse = fp.parse(item).entries
 		res[inc] = parse
 		# Ajoute la provenance à chaque article
 		for article in res[inc]:
-			article["from"] = "reddit"
+			article["from"] = "Feed RSS"
+			article["source"] = item
+			article["published"] = mktime(article["published_parsed"])
 		inc = inc + 1
 
 	with open(PATH_FileRes, 'w') as f:

@@ -5,14 +5,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import qtmodern.styles
 import qtmodern.windows
-import mainCol
+from FillmainCol import mainCol
 import time
 from threading import Thread
 from tinydb import TinyDB, Query
 
 from GUI.mainwindow import Ui_MainWindow
 import sys
-import utils as u
+from FillmainCol.scrapers import utils as u
 db = TinyDB(u.PATH_DB)
 
 
@@ -34,6 +34,7 @@ def MainColWorkFunc():
 class GUIActualiT(QtWidgets.QMainWindow):
     def __init__(self, title="Default", parent=None):
         super(GUIActualiT, self).__init__(parent)
+        self.old_List = []
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.pushButton.clicked.connect(self.buttonClicked)
@@ -42,11 +43,13 @@ class GUIActualiT(QtWidgets.QMainWindow):
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
         for item in liste:
-            date = str(time.ctime(item.date))
-            Qitem = QtWidgets.QListWidgetItem()
-            Qitem.setText(str(item.titre)+' | '+date)
-            Qitem.setData(Qt.UserRole, item.ID)
-            self.ui.mainCol.addItem(Qitem)
+            if item not in self.old_List :
+	            date = str(time.ctime(item.date))
+	            Qitem = QtWidgets.QListWidgetItem()
+	            Qitem.setText(str(item.titre)+' | '+date)
+	            Qitem.setData(Qt.UserRole, item.ID)
+	            self.ui.mainCol.addItem(Qitem)
+        self.old_List = liste
 
     def item_click(self, item):
         id = item.data(Qt.UserRole)

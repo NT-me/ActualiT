@@ -1,14 +1,14 @@
 import json
-import newsAPI as napi
+from FillmainCol.scrapers import newsAPI as napi
 from tinydb import TinyDB, Query
 import os
-import feed
-import reddit
-import twitter
+from FillmainCol.scrapers import feed
+from FillmainCol.scrapers import reddit
+from FillmainCol.scrapers import twitter
 import re
-import utils as u
+from FillmainCol.scrapers import utils as u
 from threading import Thread
-import dbToList as dbt
+from . import dbToList as dbt
 
 
 def parse(nom_file):
@@ -98,7 +98,6 @@ def all_ask():
 
 
 def all_parse():
-
 	# Fichier de sortie
 	PATH_OutFile = u.PATH_DB
 	db = TinyDB(PATH_OutFile)

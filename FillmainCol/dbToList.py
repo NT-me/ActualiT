@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import utils as u
+from FillmainCol.scrapers import utils as u
 from tinydb import TinyDB
 import time
 
