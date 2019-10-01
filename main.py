@@ -9,13 +9,9 @@ from FillmainCol import mainCol
 import time
 from threading import Thread
 from tinydb import TinyDB, Query
-
 from GUI.mainwindow import Ui_MainWindow
 import sys
 from FillmainCol.scrapers import utils as u
-
-from Model import article as ar
-
 db = TinyDB(u.PATH_DB)
 
 
@@ -46,12 +42,12 @@ class GUIActualiT(QtWidgets.QMainWindow):
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
         for item in liste:
-            if item not in self.old_List :
-	            date = str(time.ctime(item.date))
-	            Qitem = QtWidgets.QListWidgetItem()
-	            Qitem.setText(str(item.titre)+' | '+date)
-	            Qitem.setData(Qt.UserRole, item.ID)
-	            self.ui.mainCol.addItem(Qitem)
+            if item not in self.old_List:
+                date = str(time.ctime(item.date))
+                Qitem = QtWidgets.QListWidgetItem()
+                Qitem.setText(str(item.titre)+' | '+date)
+                Qitem.setData(Qt.UserRole, item.ID)
+                self.ui.mainCol.addItem(Qitem)
         self.old_List = liste
 
     def item_click(self, item):
@@ -62,17 +58,14 @@ class GUIActualiT(QtWidgets.QMainWindow):
             contenu = ''
             try:
                 title = article[0]["Titre"]
-                print(title)
-            except TypeError :
+            except TypeError:
                 title = 'Title is broken !'
             try:
                 contenu = article[0]["Contenu"]
-                print(title)
             except TypeError:
                 contenu = ''
             self.ui.articleShower.clear()
-            self.ui.articleShower.append(ar.model(title, contenu, str(article[0]["info_source"]), str(article[0]["Auteur"]), str(article[0]["Lien"])))
-			#self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
+            self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
 
 
 if __name__ == "__main__":
