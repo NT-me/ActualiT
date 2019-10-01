@@ -13,6 +13,9 @@ from tinydb import TinyDB, Query
 from GUI.mainwindow import Ui_MainWindow
 import sys
 from FillmainCol.scrapers import utils as u
+
+from Model import article as ar
+
 db = TinyDB(u.PATH_DB)
 
 
@@ -68,7 +71,8 @@ class GUIActualiT(QtWidgets.QMainWindow):
             except TypeError:
                 contenu = ''
             self.ui.articleShower.clear()
-            self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
+            self.ui.articleShower.append(ar.model(title, contenu, str(article[0]["info_source"]), str(article[0]["Auteur"]), str(article[0]["Lien"])))
+			#self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
 
 
 if __name__ == "__main__":
