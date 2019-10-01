@@ -1,21 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from FillmainCol.scrapers import utils as u
+from FillmainCol.scrapers.utils import Article
 from tinydb import TinyDB
 import time
-
-
-class Article:
-    def __init__(self, ID, titre, auteur, info_source, lien, resume, lien_img, date, module_source):
-        self.ID = ID
-        self.titre = titre
-        self.auteur = auteur
-        self.info_source = info_source
-        self.lien = lien
-        self.resume = resume
-        self.lien_img = lien_img
-        self.date = date
-        self.module_source = module_source
 
 
 def sortMainCol():
@@ -40,6 +27,6 @@ def sortMainCol():
         i += 1
     try:
         db.remove(doc_ids=ListeR)
-    except :
+    except:
             pass
     return sorted(ListA, key=getDate, reverse=True)
