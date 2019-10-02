@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from FillmainCol.scrapers import utils as u
+from FillmainCol import wrapperDB as wdb
 from FillmainCol.scrapers.utils import Article
 from tinydb import TinyDB
 import time
 
 
 def sortMainCol():
-    db = TinyDB(u.PATH_DB)
+    db = TinyDB(wdb.PATH_DB)
 
     len_DB = len(db)
 
@@ -20,8 +20,8 @@ def sortMainCol():
     # ListeA contient les articles sous forme d'objet
     while i < len_DB:
         artDB = db.all()[i]
-        if artDB["Publication"] > time.time() - 604800:
-            ListA.append(Article(artDB["ID"], artDB["Titre"], artDB["Auteur"], artDB["info_source"], artDB["Lien"], artDB["Contenu"], artDB["URL_image"], artDB["Publication"], artDB["module_source"]))
+        if artDB["date"] > time.time() - 604800:
+            ListA.append(Article(artDB["ID"], artDB["titre"], artDB["auteur"], artDB["info_source"], artDB["lien"], artDB["resume"], artDB["lien_img"], artDB["date"], artDB["module_source"]))
         else:
             ListeR.append(i)
         i += 1

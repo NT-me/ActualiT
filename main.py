@@ -12,7 +12,10 @@ from tinydb import TinyDB, Query
 from GUI.mainwindow import Ui_MainWindow
 import sys
 from FillmainCol.scrapers import utils as u
-db = TinyDB(u.PATH_DB)
+from FillmainCol import wrapperDB as wdb
+
+
+db = TinyDB(wdb.PATH_DB)
 
 
 class MainColWork(Thread):
@@ -54,14 +57,15 @@ class GUIActualiT(QtWidgets.QMainWindow):
         id = item.data(Qt.UserRole)
         if id != 0:
             article = db.search(Query().ID == id)
+            print(id)
             title = ''
             contenu = ''
             try:
-                title = article[0]["Titre"]
+                title = article[0]["titre"]
             except TypeError:
                 title = 'Title is broken !'
             try:
-                contenu = article[0]["Contenu"]
+                contenu = article[0]["resume"]
             except TypeError:
                 contenu = ''
             self.ui.articleShower.clear()

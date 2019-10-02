@@ -8,8 +8,8 @@ PATH_DB = "mainCol.json"
 
 class Article:
     def __init__(self, ID, titre, auteur, info_source, lien, resume, lien_img, date, module_source):
-        self.ID = ID
         self.titre = titre
+        self.ID = ID
         self.auteur = auteur
         self.info_source = info_source
         self.lien = lien
@@ -17,6 +17,7 @@ class Article:
         self.lien_img = lien_img
         self.date = date
         self.module_source = module_source
+
 
 def MTime(func):
 	def wrapper(*args, **kwargs):

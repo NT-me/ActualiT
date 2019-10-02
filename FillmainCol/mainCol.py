@@ -1,6 +1,5 @@
 import json
 from FillmainCol.scrapers import newsAPI as napi
-from tinydb import TinyDB, Query
 import os
 from FillmainCol.scrapers import feed
 from FillmainCol.scrapers import reddit
@@ -9,6 +8,8 @@ import re
 from FillmainCol.scrapers import utils as u
 from threading import Thread
 from . import dbToList as dbt
+from FillmainCol.scrapers.utils import Article
+from FillmainCol import wrapperDB as wdb
 
 
 def parse(nom_file):
@@ -98,9 +99,7 @@ def all_ask():
 
 
 def all_parse():
-	# Fichier de sortie
-	PATH_OutFile = u.PATH_DB
-	db = TinyDB(PATH_OutFile)
+
 	# Fichier de source de newsAPI
 	PATH_FileNA = napi.PATH_FileRes
 
@@ -122,16 +121,6 @@ def all_parse():
 
 	articleTWEET = parse(PATH_FileTWEET)
 
-	# Forme d'un article dans la DB article
-	# ID
-	# Titre
-	# Auteur
-	# info_source
-	# Lien
-	# Resumé
-	# Lien image
-	# Date de publication
-
 	print("===- News API START -===")
 	for item in articleNA["articles"]:
 		titre = item["title"]
@@ -142,41 +131,34 @@ def all_parse():
 		lien_img = item["urlToImage"]
 		date = u.convert_time(item["publishedAt"])
 		module_source = item["from"]
-		if db.search(Query().Titre == titre) == []:
-			ID = hash(titre)
-			db.insert({"ID": ID, "Titre" : titre, "Auteur" : auteur, "info_source": info_source,
-			"Lien": lien, "Contenu": resume, "URL_image": lien_img, "Publication": date, "module_source": module_source})
+		wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- News Api OK -===")
 
 	print("===- Feed START -===")
 	for i in articleFEED:
 		for item in articleFEED[i]:
 			titre = item["title"]
-			try :
+			try:
 				auteur = item["author"]
 			except:
 				auteur = None
-				print("F Pas d'auteur trouvé")
 			info_source = item["source"]
 			lien = item["link"]
 			resume = item["summary"]
-			try :
+			try:
 				lien_img = item["links"][1]["href"]
 			except:
 				lien_img = None
 			date = item["published"]
 			module_source = item["from"]
-			if db.search(Query().Titre == titre) == []:
-				ID = hash(titre)
-				db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
-				"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
+			wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Feed OK -===")
 
 	print("==- Reddit START -==")
 	for i in articleREDDIT:
 		for item in articleREDDIT[i]:
 			titre = item["title"]
-			try :
+			try:
 				auteur = item["author"]
 			except:
 				auteur = None
@@ -186,25 +168,22 @@ def all_parse():
 			lien_img = None
 			date = u.convert_time(item["updated"])
 			module_source = item["from"]
-			if db.search(Query().Titre == titre) == []:
-				ID = hash(titre)
-				db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
-				"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
+			wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Reddit OK -===")
 
 	print("==- Twitter START -==")
 	for i in articleTWEET:
 		item = i
 		titre = "Tweet de "+item["author"]
-		try :
-			titre = titre +"-"+ item["hashtags"][0]
+		try:
+			titre = titre + "-" + item["hashtags"][0]
 		except:
 			pass
 		auteur = item["author"]
 		info_source = item["type"]
 		lien = "https://www.twitter.com/home/"+item["id"]
 		resume = item["text"]
-		try :
+		try:
 			lien_img = item["entries"]["photos"][0]
 		except:
 			try:
@@ -213,10 +192,7 @@ def all_parse():
 				lien_img = None
 		date = int(item["time"][:10])
 		module_source = "Twitter"
-		if db.search(Query().Titre == titre) == []:
-			ID = hash(titre)
-			db.insert({"ID":ID, "Titre":titre, "Auteur":auteur, "info_source":info_source,
-			"Lien": lien, "Contenu":resume, "URL_image":lien_img, "Publication": date, "module_source":module_source})
+		wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Twitter OK -===")
 
 
