@@ -19,6 +19,7 @@ def insertArticle(A):
     else:
         return -1
 
+
 def insertArticles(L):
     """
     Insert an article in the DB
@@ -29,13 +30,42 @@ def insertArticles(L):
     res = list()
     for item in L:
         if type(item) != Article:
+            print(item)
             raise ValueError("Items in lists are not Article")
             return -1
         res.append(insertArticle(item))
     return res
 
+
 def readArticle(ID):
     """
+    Take back an article from DB
+
     ID -> article object
+    return -> The Article requested
     """
-    pass
+    A = Article()
+    DictArt = db.search(Query().ID == ID)
+    if DictArt == []:
+        return -1
+    else:
+        for key in DictArt[0]:
+            setattr(A, key, DictArt[0][key])
+
+    return A
+
+
+def readArticles(LID):
+    """
+    Take back an article's list
+
+    param -> ID list
+    return -> Article list
+    """
+    res = list()
+    for id in LID:
+        a = readArticle(id)
+        if type(a) == Article:
+            res.append(a)
+
+    return res

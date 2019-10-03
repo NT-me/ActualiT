@@ -7,7 +7,7 @@ PATH_DB = "mainCol.json"
 
 
 class Article:
-    def __init__(self, ID, titre, auteur, info_source, lien, resume, lien_img, date, module_source):
+    def __init__(self, ID=None, titre=None, auteur=None, info_source=None, lien=None, resume=None, lien_img=None, date=None, module_source=None):
         self.titre = titre
         self.ID = ID
         self.auteur = auteur

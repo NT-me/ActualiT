@@ -56,16 +56,16 @@ class GUIActualiT(QtWidgets.QMainWindow):
     def item_click(self, item):
         id = item.data(Qt.UserRole)
         if id != 0:
-            article = db.search(Query().ID == id)
+            article = wdb.readArticle(id)
             print(id)
             title = ''
             contenu = ''
             try:
-                title = article[0]["titre"]
+                title = article.titre
             except TypeError:
                 title = 'Title is broken !'
             try:
-                contenu = article[0]["resume"]
+                contenu = article.resume
             except TypeError:
                 contenu = ''
             self.ui.articleShower.clear()

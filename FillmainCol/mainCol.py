@@ -121,6 +121,8 @@ def all_parse():
 
 	articleTWEET = parse(PATH_FileTWEET)
 
+	ArtList = list()
+
 	print("===- News API START -===")
 	for item in articleNA["articles"]:
 		titre = item["title"]
@@ -131,7 +133,7 @@ def all_parse():
 		lien_img = item["urlToImage"]
 		date = u.convert_time(item["publishedAt"])
 		module_source = item["from"]
-		wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- News Api OK -===")
 
 	print("===- Feed START -===")
@@ -151,7 +153,7 @@ def all_parse():
 				lien_img = None
 			date = item["published"]
 			module_source = item["from"]
-			wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Feed OK -===")
 
 	print("==- Reddit START -==")
@@ -168,7 +170,7 @@ def all_parse():
 			lien_img = None
 			date = u.convert_time(item["updated"])
 			module_source = item["from"]
-			wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Reddit OK -===")
 
 	print("==- Twitter START -==")
@@ -192,8 +194,10 @@ def all_parse():
 				lien_img = None
 		date = int(item["time"][:10])
 		module_source = "Twitter"
-		wdb.insertArticle(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
 	print("===- Twitter OK -===")
+
+	wdb.insertArticles(ArtList)
 
 
 def gen_mainCol():
