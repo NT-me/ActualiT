@@ -39,6 +39,7 @@ class Ui_MainWindow(object):
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
         self.mainCol.setFont(font)
         self.mainCol.setStyleSheet("font: 15pt \"Montserrat\";\n"
+"QListWidget.item : padding 10px;\n"
 "")
         self.mainCol.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.mainCol.setLineWidth(10)
