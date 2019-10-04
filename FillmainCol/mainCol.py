@@ -10,10 +10,11 @@ from threading import Thread
 from . import dbToList as dbt
 from FillmainCol.scrapers.utils import Article
 from FillmainCol import wrapperDB as wdb
+from queue import Queue
 
 
-def parse(nom_file):
-	# Parse du fichier et transormation en dico
+def reader(nom_file):
+	# Lit du fichier et transormation en dico
 	File = open(nom_file, "r")
 	article = dict()
 	try:
@@ -69,6 +70,124 @@ class TwitterWork(Thread):
 	def run(self):
 		twitter.askTwitter()
 
+def parseNAC():
+	ArtList = list()
+	# Fichier de source de newsAPI
+	PATH_FileNA = napi.PATH_FileRes
+
+	# Read non-formated file
+	articleNA = reader(PATH_FileNA)
+
+	print("===- News API START -===")
+	for item in articleNA["articles"]:
+		titre = item["title"]
+		auteur = item["author"]
+		info_source = item["source"]["name"]
+		lien = item["url"]
+		resume = item["content"]
+		lien_img = item["urlToImage"]
+		date = u.convert_time(item["publishedAt"])
+		module_source = item["from"]
+		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+	print("===- News Api OK -===")
+
+	return ArtList
+
+def parseFeed():
+	ArtList = list()
+
+	# Fichier de source de feed
+	PATH_FileFEED = feed.PATH_FileRes
+
+	# read non-formated file
+	articleFEED = reader(PATH_FileFEED)
+
+	print("===- Feed START -===")
+	for i in articleFEED:
+		for item in articleFEED[i]:
+			titre = item["title"]
+			try:
+				auteur = item["author"]
+			except:
+				auteur = None
+			info_source = item["source"]
+			lien = item["link"]
+			resume = item["summary"]
+			try:
+				lien_img = item["links"][1]["href"]
+			except:
+				lien_img = None
+			date = item["published"]
+			module_source = item["from"]
+			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+	print("===- Feed OK -===")
+
+	return ArtList
+
+
+
+def parseReddit():
+	ArtList = list()
+
+	# Fichier de source de reddit
+	PATH_FileREDDIT = reddit.PATH_FileRes
+
+	# Read non foramted file
+	articleREDDIT = reader(PATH_FileREDDIT)
+
+	print("==- Reddit START -==")
+	for i in articleREDDIT:
+		for item in articleREDDIT[i]:
+			titre = item["title"]
+			try:
+				auteur = item["author"]
+			except:
+				auteur = None
+			info_source = item["tags"][0]["label"]
+			lien = item["link"]
+			resume = withoutHTML(item["summary"])
+			lien_img = None
+			date = u.convert_time(item["updated"])
+			module_source = item["from"]
+			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+	print("===- Reddit OK -===")
+
+	return ArtList
+
+
+def parseTwitter():
+	ArtList = list()
+
+	# Fichier de source de twitter
+	PATH_FileTWEET = twitter.PATH_FileRes
+
+	articleTWEET = reader(PATH_FileTWEET)
+
+	print("==- Twitter START -==")
+	for i in articleTWEET:
+		item = i
+		titre = "Tweet de "+item["author"]
+		try:
+			titre = titre + "-" + item["hashtags"][0]
+		except:
+			pass
+		auteur = item["author"]
+		info_source = item["type"]
+		lien = "https://www.twitter.com/home/"+item["id"]
+		resume = item["text"]
+		try:
+			lien_img = item["entries"]["photos"][0]
+		except:
+			try:
+				lien_img = item["entries"]["videos"][0]
+			except:
+				lien_img = None
+		date = int(item["time"][:10])
+		module_source = "Twitter"
+		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
+	print("===- Twitter OK -===")
+
+	return ArtList
 
 def all_ask():
 	# Déclaration des threads
@@ -97,105 +216,65 @@ def all_ask():
 	thread_Twitter.join()
 	print("--=End ask=--")
 
+class parseNAC_T(Thread):
+	def __init__(self, queueOut):
+		Thread.__init__(self)
+		self.queueOut = queueOut
+
+	def run(self):
+		self.queueOut.put(parseNAC())
+
+
+class parseFeed_T(Thread):
+	def __init__(self, queueOut):
+		Thread.__init__(self)
+		self.queueOut = queueOut
+
+	def run(self):
+		self.queueOut.put(parseFeed())
+
+
+class parseReddit_T(Thread):
+	def __init__(self, queueOut):
+		Thread.__init__(self)
+		self.queueOut = queueOut
+
+	def run(self):
+		self.queueOut.put(parseReddit())
+
+
+class parseTwitter_T(Thread):
+	def __init__(self, queueOut):
+		Thread.__init__(self)
+		self.queueOut = queueOut
+
+	def run(self):
+		self.queueOut.put(parseTwitter())
 
 def all_parse():
+	queueOut = Queue()
 
-	# Fichier de source de newsAPI
-	PATH_FileNA = napi.PATH_FileRes
+	NAC_T = parseNAC_T(queueOut)
+	Feed_T = parseFeed_T(queueOut)
+	Reddit_T = parseReddit_T(queueOut)
+	Twitter_T = parseTwitter_T(queueOut)
 
-	# Fichier de source de feed
-	PATH_FileFEED = feed.PATH_FileRes
-
-	# Fichier de source de reddit
-	PATH_FileREDDIT = reddit.PATH_FileRes
-
-	# Fichier de source de twitter
-	PATH_FileTWEET = twitter.PATH_FileRes
-
-	# Parse les fichiers sources
-	articleNA = parse(PATH_FileNA)
-
-	articleFEED = parse(PATH_FileFEED)
-
-	articleREDDIT = parse(PATH_FileREDDIT)
-
-	articleTWEET = parse(PATH_FileTWEET)
+	NAC_T.start()
+	Feed_T.start()
+	Reddit_T.start()
+	Twitter_T.start()
 
 	ArtList = list()
 
-	print("===- News API START -===")
-	for item in articleNA["articles"]:
-		titre = item["title"]
-		auteur = item["author"]
-		info_source = item["source"]["name"]
-		lien = item["url"]
-		resume = item["content"]
-		lien_img = item["urlToImage"]
-		date = u.convert_time(item["publishedAt"])
-		module_source = item["from"]
-		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
-	print("===- News Api OK -===")
+	NAC_T.join()
+	Feed_T.join()
+	Reddit_T.join()
+	Twitter_T.join()
 
-	print("===- Feed START -===")
-	for i in articleFEED:
-		for item in articleFEED[i]:
-			titre = item["title"]
-			try:
-				auteur = item["author"]
-			except:
-				auteur = None
-			info_source = item["source"]
-			lien = item["link"]
-			resume = item["summary"]
-			try:
-				lien_img = item["links"][1]["href"]
-			except:
-				lien_img = None
-			date = item["published"]
-			module_source = item["from"]
-			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
-	print("===- Feed OK -===")
+	while queueOut.empty() == False:
+		ArtList = ArtList + queueOut.get()
 
-	print("==- Reddit START -==")
-	for i in articleREDDIT:
-		for item in articleREDDIT[i]:
-			titre = item["title"]
-			try:
-				auteur = item["author"]
-			except:
-				auteur = None
-			info_source = item["tags"][0]["label"]
-			lien = item["link"]
-			resume = withoutHTML(item["summary"])
-			lien_img = None
-			date = u.convert_time(item["updated"])
-			module_source = item["from"]
-			ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
-	print("===- Reddit OK -===")
-
-	print("==- Twitter START -==")
-	for i in articleTWEET:
-		item = i
-		titre = "Tweet de "+item["author"]
-		try:
-			titre = titre + "-" + item["hashtags"][0]
-		except:
-			pass
-		auteur = item["author"]
-		info_source = item["type"]
-		lien = "https://www.twitter.com/home/"+item["id"]
-		resume = item["text"]
-		try:
-			lien_img = item["entries"]["photos"][0]
-		except:
-			try:
-				lien_img = item["entries"]["videos"][0]
-			except:
-				lien_img = None
-		date = int(item["time"][:10])
-		module_source = "Twitter"
-		ArtList.append(Article(hash(titre), titre, auteur, info_source, lien, resume, lien_img, date, module_source))
-	print("===- Twitter OK -===")
+	#queueOut.task_done()
 
 	wdb.insertArticles(ArtList)
 
