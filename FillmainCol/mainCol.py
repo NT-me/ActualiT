@@ -70,6 +70,7 @@ class TwitterWork(Thread):
 	def run(self):
 		twitter.askTwitter()
 
+
 def parseNAC():
 	ArtList = list()
 	# Fichier de source de newsAPI
@@ -92,6 +93,7 @@ def parseNAC():
 	print("===- News Api OK -===")
 
 	return ArtList
+
 
 def parseFeed():
 	ArtList = list()
@@ -123,7 +125,6 @@ def parseFeed():
 	print("===- Feed OK -===")
 
 	return ArtList
-
 
 
 def parseReddit():
@@ -189,6 +190,7 @@ def parseTwitter():
 
 	return ArtList
 
+
 def all_ask():
 	# Déclaration des threads
 	thread_NAC = NACWork()
@@ -215,6 +217,7 @@ def all_ask():
 	thread_Reddit.join()
 	thread_Twitter.join()
 	print("--=End ask=--")
+
 
 class parseNAC_T(Thread):
 	def __init__(self, queueOut):
@@ -250,6 +253,7 @@ class parseTwitter_T(Thread):
 
 	def run(self):
 		self.queueOut.put(parseTwitter())
+
 
 def all_parse():
 	queueOut = Queue()

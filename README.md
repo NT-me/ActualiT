@@ -6,6 +6,54 @@
 
 [TOC]
 
+
+
+## EN
+
+### Install
+
+:warning: The requirement file is not update ! :warning:
+
+#### Prerequisites
+
+- Python >= 3.5
+
+#### Linux
+
+```shell
+git clone https://github.com/gnouf1/ActualiT.git ActualiT
+cd ActualiT
+python main.py
+# If you have other version
+python3 main.py
+```
+
+#### Windows
+
+```shell
+git clone https://github.com/gnouf1/ActualiT.git ActualiT
+cd ActualiT
+python main.py
+# If you have other version
+python3 main.py
+```
+
+
+
+### Interface
+
+### Architecture
+
+### Features
+
+### Contributing
+
+Please contact me on discord especially while this README it's not finish.
+
+##### Discord
+
+:phone: https://discord.gg/GsSkvku
+
 ## FR
 
 Nous sommes continuelement bombardé d'information en tout genre venant de partout sur de multiples réseaux. On souhaiterais pouvoir suivre l'actualité mais ça devient hélas impossible à cause du trop grand nombre d'information.
@@ -58,51 +106,7 @@ Si vous souhaitez participer je vous invite à me contacter par Discord avant de
 
 :phone: https://discord.gg/GsSkvku
 
-## EN
 
-### Install
-
-:warning: The requirement file is not update ! :warning:
-
-#### Prerequisites
-
-- Python >= 3.5
-
-#### Linux
-
-```shell
-git clone https://github.com/gnouf1/ActualiT.git ActualiT
-cd ActualiT
-python main.py
-# If you have other version
-python3 main.py
-```
-
-#### Windows
-
-```shell
-git clone https://github.com/gnouf1/ActualiT.git ActualiT
-cd ActualiT
-python main.py
-# If you have other version
-python3 main.py
-```
-
-
-
-### Interface
-
-### Architecture
-
-### Features
-
-### Contributing
-
-Please contact me on discord especially while this README it's not finish.
-
-##### Discord
-
-:phone: https://discord.gg/GsSkvku
 
 ## Author
 
