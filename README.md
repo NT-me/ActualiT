@@ -8,11 +8,17 @@
 
 
 
-## EN
+## EN ​
+
+We are constantly bombarded with information of all kinds from all over the world on multiple networks. We would like to be able to follow the news, but unfortunately it is becoming impossible because of the too much information.
+
+ActualiT is there to help solve this problem, it will retrieve for you the news on different networks (twitter, reddit, RSS and newsAPI) and bring it back to you on a simple and simple interface. 
+
+Then it is up to you to settle for the brief summary provided or go to the site from which the information comes for more details.
+
+Translated with www.DeepL.com/Translator
 
 ### Install
-
-:warning: The requirement file is not update ! :warning:
 
 #### Prerequisites
 
@@ -23,8 +29,10 @@
 ```shell
 git clone https://github.com/gnouf1/ActualiT.git ActualiT
 cd ActualiT
+pip install requirements.txt --user
 python main.py
-# If you have other version
+# If you have two versions
+pip3 install requirements.txt --user
 python3 main.py
 ```
 
@@ -33,18 +41,59 @@ python3 main.py
 ```shell
 git clone https://github.com/gnouf1/ActualiT.git ActualiT
 cd ActualiT
+pip install requirements.txt
 python main.py
-# If you have other version
-python3 main.py
 ```
 
 
 
 ### Interface
 
+The GUI is not fully finish.
+
+![Interface](https://zupimages.net/up/19/41/f7p6.png)
+
+But as we can see here she's in three parts. 
+
+From left to right :
+
+- **Button part** : Here juste the refresh button for the moment.
+- **mainCol**: Here we can see *all* the articles that have been scraped on RSS/Tweeter/Reddit/NewsAPI.
+- **Article Shower**: Here you can read an little summary of your article or read more when clic on the "En Savoir Plus..." link.
+
 ### Architecture
 
+![](https://zupimages.net/up/19/41/u2w4.png)
+
+
+
 ### Features
+
+[X]  Read article
+
+[X] Add sources from txt files
+
+[] Add sources from GUI
+
+[] Word Cloud
+
+[] Heatmap
+
+[] Refresh specific source
+
+[] Save article
+
+[] Share article
+
+[] Rank source
+
+[] Do an real roadmap
+
+[] Multi-language support
+
+[] People recognize
+
+
 
 ### Contributing
 
@@ -64,8 +113,6 @@ Ensuite libre à vous de vous contenter du résumé succint fournit ou d'aller s
 
 ### Installation
 
-:warning: Le fichier requirement n'est pas à jour ! :warning:
-
 #### Pré-requis
 
 - Python >= 3.5
@@ -75,8 +122,11 @@ Ensuite libre à vous de vous contenter du résumé succint fournit ou d'aller s
 ```shell
 git clone https://github.com/gnouf1/ActualiT.git ActualiT
 cd ActualiT
+
+pip install requirements.txt --user
 python main.py
-# Ou si vous avez plusieurs version de python installées
+# If you have two versions
+pip3 install requirements.txt --user
 python3 main.py
 ```
 
@@ -85,12 +135,9 @@ python3 main.py
 ```shell
 git clone https://github.com/gnouf1/ActualiT.git ActualiT
 cd ActualiT
+pip install requirements.txt
 python main.py
-# Ou si vous avez plusieurs version de python installées
-python3 main.py
 ```
-
-
 
 ### L'interface
 
@@ -114,9 +161,9 @@ Si vous souhaitez participer je vous invite à me contacter par Discord avant de
 
 ## Version
 
+Alpha, really early.
+
 ## Licence
-
-
 
 
 
