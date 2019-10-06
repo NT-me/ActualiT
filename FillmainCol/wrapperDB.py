@@ -69,3 +69,20 @@ def readArticles(LID):
             res.append(a)
 
     return res
+
+
+def readAllArticles():
+    """
+    Return an list with all articles
+    """
+    listDict = db.all()
+
+    res = list()
+
+    for art in listDict:
+        A = Article()
+        for key in art:
+            setattr(A, key, art[key])
+        res.append(A)
+
+    return res

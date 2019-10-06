@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -8,14 +7,12 @@ import qtmodern.windows
 from FillmainCol import mainCol
 import time
 from threading import Thread
-from tinydb import TinyDB, Query
 from GUI.mainwindow import Ui_MainWindow
 import sys
 from FillmainCol.scrapers import utils as u
 from FillmainCol import wrapperDB as wdb
-
-
-db = TinyDB(wdb.PATH_DB)
+from Model import article as Mart
+import os
 
 
 class MainColWork(Thread):
@@ -44,6 +41,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
+
+        def getDate(article):
+            return article.date
+
+        liste = sorted(liste, key=getDate, reverse=True)
         for item in liste:
             if item not in self.old_List:
                 date = str(time.ctime(item.date))
@@ -69,7 +71,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
             except TypeError:
                 contenu = ''
             self.ui.articleShower.clear()
-            self.ui.articleShower.append('<h1>' + str(title) + '</h1>' + '\n' + '<p>' + str(contenu) + '</p>')
+            self.ui.articleShower.append(Mart.model(article))
 
 
 if __name__ == "__main__":

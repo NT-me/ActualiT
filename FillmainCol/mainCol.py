@@ -275,15 +275,14 @@ def all_parse():
 	Reddit_T.join()
 	Twitter_T.join()
 
-	while queueOut.empty() == False:
+	while queueOut.empty() is False:
 		ArtList = ArtList + queueOut.get()
-
-	#queueOut.task_done()
 
 	wdb.insertArticles(ArtList)
 
 
+@u.MTime
 def gen_mainCol():
 	all_ask()
 	all_parse()
-	return dbt.sortMainCol()
+	return wdb.readAllArticles()

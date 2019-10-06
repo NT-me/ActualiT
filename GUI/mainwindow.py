@@ -25,6 +25,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addItem(spacerItem, 0, 0, 1, 1)
         self.articleShower = QtWidgets.QTextBrowser(self.centralwidget)
         self.articleShower.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.articleShower.setAutoFormatting(QtWidgets.QTextEdit.AutoAll)
+        self.articleShower.setOpenExternalLinks(True)
         self.articleShower.setObjectName("articleShower")
         self.gridLayout.addWidget(self.articleShower, 0, 7, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -62,7 +64,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 1428, 28))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 1428, 21))
         self.menuBar.setObjectName("menuBar")
         self.menuRSS = QtWidgets.QMenu(self.menuBar)
         self.menuRSS.setObjectName("menuRSS")
@@ -99,7 +101,7 @@ class Ui_MainWindow(object):
         self.articleShower.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Noto Sans\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Roboto\'; font-size:15pt;\"><br /></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Refresh"))
         self.menuRSS.setTitle(_translate("MainWindow", "RSS"))

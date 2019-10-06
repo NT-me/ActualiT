@@ -24,7 +24,9 @@ def MTime(func):
         t = process_time()
         response = func(*args, **kwargs)
         elapsed_time = process_time() - t
-        print(elapsed_time)
+        Fname = str(func.__name__)
+        elapsed_time = str(elapsed_time)
+        print("-= " + Fname + " : " + elapsed_time + "\n")
         return response
     return wrapper
 
