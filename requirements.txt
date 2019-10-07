@@ -13,9 +13,6 @@ feedparser == 5.2.1
 # FillmainCol\scrapers\newsAPI.py: 2
 newsapi_python == 0.2.5
 
-# main.py: 10
-pygameguilib == 0.4a6
-
 # FillmainCol\scrapers\utils.py: 1
 python_dateutil == 2.8.0
 
