@@ -76,7 +76,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    qtmodern.styles.dark(app)
+    #qtmodern.styles.dark(app)
     w = GUIActualiT()
     w.show()
     sys.exit(app.exec_())
