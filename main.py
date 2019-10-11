@@ -7,7 +7,7 @@ import qtmodern.windows
 from FillmainCol import mainCol
 import time
 from threading import Thread
-from GUI.mainwindow import Ui_MainWindow
+from GUI.GUI_2 import Ui_MainWindow
 import sys
 from FillmainCol.scrapers import utils as u
 from FillmainCol import wrapperDB as wdb
@@ -36,7 +36,9 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.old_List = []
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.buttonClicked)
+        self.setWindowTitle("ActualiT")
+        self.setWindowIcon(QIcon('icon.png'))
+        self.ui.refreshButton.clicked.connect(self.buttonClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
 
     def buttonClicked(self):

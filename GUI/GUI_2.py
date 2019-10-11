@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI/mainwindow.ui'
+# Form implementation generated from reading ui file 'GUI_2.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.1
 #
@@ -13,30 +13,38 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1428, 885)
+        MainWindow.setEnabled(True)
+        MainWindow.resize(1049, 762)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
+        MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("* {\n"
-"    font-family: \"Roboto\";\n"
+"    font-family: \"Microsoft YaHei\";\n"
 "}\n"
 "\n"
 "/*QPushButton*/\n"
 "QPushButton {\n"
 "    color: #fff;\n"
-"        background-color: #cccccc;\n"
-"    border: 1px solid rgba(0, 255, 255, 0);\n"
+"    border: 0px solid rgba(255, 255, 255, 0);\n"
 "    font-size: 12px;\n"
 "    font-weight: 700;\n"
+"    border-radius: 5px;\n"
 "}\n"
 "\n"
 "/*MediumGray*/\n"
-"QPushButton[class=\"MediumGray\"] {\n"
+"QPushButton{\n"
 "    background-color: #aab2bd;\n"
 "}\n"
 "\n"
-"QPushButton:hover[class=\"MediumGray\"] {\n"
+"QPushButton:hover {\n"
 "    background-color: #ccd1d9;\n"
 "}\n"
 "\n"
-"QPushButton:pressed[class=\"MediumGray\"] {\n"
+"QPushButton:pressed {\n"
 "    background: qradialgradient(cx:0.5,\n"
 "    cy: 0.5,\n"
 "    fx: 0.5,\n"
@@ -709,22 +717,98 @@ class Ui_MainWindow(object):
 "    image: url(\'%PATH%/img/minus.png\');\n"
 "}\n"
 "")
+        MainWindow.setDocumentMode(False)
+        MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 0, 0, 1, 1)
-        self.articleShower = QtWidgets.QTextBrowser(self.centralwidget)
-        self.articleShower.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.articleShower.setAutoFormatting(QtWidgets.QTextEdit.AutoAll)
-        self.articleShower.setOpenExternalLinks(True)
-        self.articleShower.setObjectName("articleShower")
-        self.gridLayout.addWidget(self.articleShower, 0, 7, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem1, 0, 6, 1, 1)
+        self.verticalDock = QtWidgets.QWidget(self.centralwidget)
+        self.verticalDock.setMinimumSize(QtCore.QSize(183, 0))
+        self.verticalDock.setMaximumSize(QtCore.QSize(183, 16777215))
+        self.verticalDock.setObjectName("verticalDock")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalDock)
+        self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.verticalLayout.setContentsMargins(-1, -1, 1, -1)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.refreshButton = QtWidgets.QPushButton(self.verticalDock)
+        font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei")
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(87)
+        self.refreshButton.setFont(font)
+        self.refreshButton.setFlat(False)
+        self.refreshButton.setObjectName("refreshButton")
+        self.verticalLayout.addWidget(self.refreshButton)
+        self.toolBox = QtWidgets.QToolBox(self.verticalDock)
+        self.toolBox.setObjectName("toolBox")
+        self.RSS_Button = QtWidgets.QWidget()
+        self.RSS_Button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.RSS_Button.setObjectName("RSS_Button")
+        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.RSS_Button)
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(0, 0, 171, 41))
+        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.RSS_manage = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
+        self.RSS_manage.setObjectName("RSS_manage")
+        self.verticalLayout_2.addWidget(self.RSS_manage)
+        self.toolBox.addItem(self.RSS_Button, "")
+        self.Reddit_button = QtWidgets.QWidget()
+        self.Reddit_button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Reddit_button.setObjectName("Reddit_button")
+        self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.Reddit_button)
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(0, 0, 171, 41))
+        self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.RSS_manage_2 = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
+        self.RSS_manage_2.setObjectName("RSS_manage_2")
+        self.verticalLayout_3.addWidget(self.RSS_manage_2)
+        self.toolBox.addItem(self.Reddit_button, "")
+        self.Twitter_button = QtWidgets.QWidget()
+        self.Twitter_button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Twitter_button.setObjectName("Twitter_button")
+        self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.Twitter_button)
+        self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(0, 0, 171, 41))
+        self.verticalLayoutWidget_4.setObjectName("verticalLayoutWidget_4")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.RSS_manage_3 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        self.RSS_manage_3.setObjectName("RSS_manage_3")
+        self.verticalLayout_4.addWidget(self.RSS_manage_3)
+        self.toolBox.addItem(self.Twitter_button, "")
+        self.Primi_Button = QtWidgets.QWidget()
+        self.Primi_Button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Primi_Button.setObjectName("Primi_Button")
+        self.verticalLayoutWidget_5 = QtWidgets.QWidget(self.Primi_Button)
+        self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(0, 0, 171, 41))
+        self.verticalLayoutWidget_5.setObjectName("verticalLayoutWidget_5")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_5)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.RSS_manage_4 = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
+        self.RSS_manage_4.setObjectName("RSS_manage_4")
+        self.verticalLayout_5.addWidget(self.RSS_manage_4)
+        self.toolBox.addItem(self.Primi_Button, "")
+        self.verticalLayout.addWidget(self.toolBox)
+        self.toolButton = QtWidgets.QToolButton(self.verticalDock)
+        self.toolButton.setObjectName("toolButton")
+        self.verticalLayout.addWidget(self.toolButton)
+        self.gridLayout.addWidget(self.verticalDock, 0, 0, 3, 1)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.mainCol = QtWidgets.QListWidget(self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei")
@@ -738,71 +822,47 @@ class Ui_MainWindow(object):
         self.mainCol.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.mainCol.setLineWidth(10)
         self.mainCol.setObjectName("mainCol")
-        self.gridLayout.addWidget(self.mainCol, 0, 5, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setEnabled(True)
-        self.pushButton.setAutoFillBackground(False)
-        self.pushButton.setAutoDefault(False)
-        self.pushButton.setFlat(False)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout.addWidget(self.pushButton, 0, 3, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem2, 0, 4, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem3, 0, 9, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem4, 0, 8, 1, 1)
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.mainCol)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.articleShower = QtWidgets.QTextBrowser(self.centralwidget)
+        self.articleShower.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.articleShower.setAutoFormatting(QtWidgets.QTextEdit.AutoAll)
+        self.articleShower.setOpenExternalLinks(True)
+        self.articleShower.setObjectName("articleShower")
+        self.horizontalLayout_2.addWidget(self.articleShower)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_2)
+        self.gridLayout.addLayout(self.verticalLayout_6, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 1428, 23))
-        self.menuBar.setObjectName("menuBar")
-        self.menuRSS = QtWidgets.QMenu(self.menuBar)
-        self.menuRSS.setObjectName("menuRSS")
-        self.menuTwitter = QtWidgets.QMenu(self.menuBar)
-        self.menuTwitter.setObjectName("menuTwitter")
-        self.menuReddit = QtWidgets.QMenu(self.menuBar)
-        self.menuReddit.setObjectName("menuReddit")
-        self.menuSources_Primitives = QtWidgets.QMenu(self.menuBar)
-        self.menuSources_Primitives.setObjectName("menuSources_Primitives")
-        MainWindow.setMenuBar(self.menuBar)
-        self.actionAjouter_Supprimer = QtWidgets.QAction(MainWindow)
-        self.actionAjouter_Supprimer.setObjectName("actionAjouter_Supprimer")
-        self.actionAjouter_Supprimer_2 = QtWidgets.QAction(MainWindow)
-        self.actionAjouter_Supprimer_2.setObjectName("actionAjouter_Supprimer_2")
-        self.actionAjouter_Supprimer_3 = QtWidgets.QAction(MainWindow)
-        self.actionAjouter_Supprimer_3.setObjectName("actionAjouter_Supprimer_3")
-        self.actionD_sactiver = QtWidgets.QAction(MainWindow)
-        self.actionD_sactiver.setObjectName("actionD_sactiver")
-        self.menuRSS.addAction(self.actionAjouter_Supprimer)
-        self.menuTwitter.addAction(self.actionAjouter_Supprimer_2)
-        self.menuReddit.addAction(self.actionAjouter_Supprimer_3)
-        self.menuSources_Primitives.addAction(self.actionD_sactiver)
-        self.menuBar.addAction(self.menuRSS.menuAction())
-        self.menuBar.addAction(self.menuTwitter.menuAction())
-        self.menuBar.addAction(self.menuReddit.menuAction())
-        self.menuBar.addAction(self.menuSources_Primitives.menuAction())
 
         self.retranslateUi(MainWindow)
+        self.toolBox.setCurrentIndex(3)
+        self.toolBox.layout().setSpacing(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.RSS_manage_2, self.RSS_manage_3)
+        MainWindow.setTabOrder(self.RSS_manage_3, self.RSS_manage_4)
+        MainWindow.setTabOrder(self.RSS_manage_4, self.toolButton)
+        MainWindow.setTabOrder(self.toolButton, self.RSS_manage)
+        MainWindow.setTabOrder(self.RSS_manage, self.refreshButton)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.refreshButton.setText(_translate("MainWindow", "Refresh"))
+        self.RSS_manage.setText(_translate("MainWindow", "Manage"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.RSS_Button), _translate("MainWindow", "RSS"))
+        self.RSS_manage_2.setText(_translate("MainWindow", "Manage"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.Reddit_button), _translate("MainWindow", "Reddit"))
+        self.RSS_manage_3.setText(_translate("MainWindow", "Manage"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.Twitter_button), _translate("MainWindow", "Twitter"))
+        self.RSS_manage_4.setText(_translate("MainWindow", "Manage"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.Primi_Button), _translate("MainWindow", "Source Primitive"))
+        self.toolButton.setText(_translate("MainWindow", "..."))
         self.articleShower.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Microsoft YaHei\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'Microsoft YaHei\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Roboto\'; font-size:15pt;\"><br /></p></body></html>"))
-        self.pushButton.setText(_translate("MainWindow", "Refresh"))
-        self.menuRSS.setTitle(_translate("MainWindow", "RSS"))
-        self.menuTwitter.setTitle(_translate("MainWindow", "Twitter"))
-        self.menuReddit.setTitle(_translate("MainWindow", "Reddit"))
-        self.menuSources_Primitives.setTitle(_translate("MainWindow", "Sources Primitives"))
-        self.actionAjouter_Supprimer.setText(_translate("MainWindow", "Ajouter/Supprimer"))
-        self.actionAjouter_Supprimer_2.setText(_translate("MainWindow", "Ajouter/Supprimer"))
-        self.actionAjouter_Supprimer_3.setText(_translate("MainWindow", "Ajouter/Supprimer"))
-        self.actionD_sactiver.setText(_translate("MainWindow", "Désactiver"))

@@ -1,42 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1428</width>
-    <height>885</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">* {
-    font-family: &quot;Roboto&quot;;
+* {
+    font-family: "Microsoft YaHei";
 }
 
 /*QPushButton*/
 QPushButton {
     color: #fff;
-		background-color: #cccccc;
-    border: 1px solid rgba(0, 255, 255, 0);
+    border: 0px solid rgba(255, 255, 255, 0);
     font-size: 12px;
     font-weight: 700;
+    border-radius: 5px;
 }
 
 /*MediumGray*/
-QPushButton[class=&quot;MediumGray&quot;] {
+QPushButton[class="MediumGray"] {
     background-color: #aab2bd;
 }
 
-QPushButton:hover[class=&quot;MediumGray&quot;] {
+QPushButton:hover[class="MediumGray"] {
     background-color: #ccd1d9;
 }
 
-QPushButton:pressed[class=&quot;MediumGray&quot;] {
+QPushButton:pressed[class="MediumGray"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -47,15 +31,15 @@ QPushButton:pressed[class=&quot;MediumGray&quot;] {
 }
 
 /*DarkGray*/
-QPushButton[class=&quot;DarkGray&quot;] {
+QPushButton[class="DarkGray"] {
     background-color: #434a54;
 }
 
-QPushButton:hover[class=&quot;DarkGray&quot;] {
+QPushButton:hover[class="DarkGray"] {
     background-color: #656d78;
 }
 
-QPushButton:pressed[class=&quot;DarkGray&quot;] {
+QPushButton:pressed[class="DarkGray"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -66,15 +50,15 @@ QPushButton:pressed[class=&quot;DarkGray&quot;] {
 }
 
 /*BlueJeans*/
-QPushButton[class=&quot;BlueJeans&quot;] {
+QPushButton[class="BlueJeans"] {
     background-color: #4a89dc;
 }
 
-QPushButton:hover[class=&quot;BlueJeans&quot;] {
+QPushButton:hover[class="BlueJeans"] {
     background-color: #5d9cec;
 }
 
-QPushButton:pressed[class=&quot;BlueJeans&quot;] {
+QPushButton:pressed[class="BlueJeans"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -85,15 +69,15 @@ QPushButton:pressed[class=&quot;BlueJeans&quot;] {
 }
 
 /*Aqua*/
-QPushButton[class=&quot;Aqua&quot;] {
+QPushButton[class="Aqua"] {
     background-color: #3bafda;
 }
 
-QPushButton:hover[class=&quot;Aqua&quot;] {
+QPushButton:hover[class="Aqua"] {
     background-color: #4fc1e9;
 }
 
-QPushButton:pressed[class=&quot;Aqua&quot;] {
+QPushButton:pressed[class="Aqua"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -104,15 +88,15 @@ QPushButton:pressed[class=&quot;Aqua&quot;] {
 }
 
 /*Mint*/
-QPushButton[class=&quot;Mint&quot;] {
+QPushButton[class="Mint"] {
     background-color: #37bc9b;
 }
 
-QPushButton:hover[class=&quot;Mint&quot;] {
+QPushButton:hover[class="Mint"] {
     background-color: #48cfad;
 }
 
-QPushButton:pressed[class=&quot;Mint&quot;] {
+QPushButton:pressed[class="Mint"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -123,15 +107,15 @@ QPushButton:pressed[class=&quot;Mint&quot;] {
 }
 
 /*Grass*/
-QPushButton[class=&quot;Grass&quot;] {
+QPushButton[class="Grass"] {
     background-color: #8cc152;
 }
 
-QPushButton:hover[class=&quot;Grass&quot;] {
+QPushButton:hover[class="Grass"] {
     background-color: #a0d468;
 }
 
-QPushButton:pressed[class=&quot;Grass&quot;] {
+QPushButton:pressed[class="Grass"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -142,15 +126,15 @@ QPushButton:pressed[class=&quot;Grass&quot;] {
 }
 
 /*Sunflower*/
-QPushButton[class=&quot;Sunflower&quot;] {
+QPushButton[class="Sunflower"] {
     background-color: #f6bb42;
 }
 
-QPushButton:hover[class=&quot;Sunflower&quot;] {
+QPushButton:hover[class="Sunflower"] {
     background-color: #ffce54;
 }
 
-QPushButton:pressed[class=&quot;Sunflower&quot;] {
+QPushButton:pressed[class="Sunflower"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -161,15 +145,15 @@ QPushButton:pressed[class=&quot;Sunflower&quot;] {
 }
 
 /*Bittersweet*/
-QPushButton[class=&quot;Bittersweet&quot;] {
+QPushButton[class="Bittersweet"] {
     background-color: #e9573f;
 }
 
-QPushButton:hover[class=&quot;Bittersweet&quot;] {
+QPushButton:hover[class="Bittersweet"] {
     background-color: #fc6e51;
 }
 
-QPushButton:pressed[class=&quot;Bittersweet&quot;] {
+QPushButton:pressed[class="Bittersweet"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -180,15 +164,15 @@ QPushButton:pressed[class=&quot;Bittersweet&quot;] {
 }
 
 /*Grapefruit*/
-QPushButton[class=&quot;Grapefruit&quot;] {
+QPushButton[class="Grapefruit"] {
     background-color: #da4453;
 }
 
-QPushButton:hover[class=&quot;Grapefruit&quot;] {
+QPushButton:hover[class="Grapefruit"] {
     background-color: #ed5565;
 }
 
-QPushButton:pressed[class=&quot;Grapefruit&quot;] {
+QPushButton:pressed[class="Grapefruit"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -199,15 +183,15 @@ QPushButton:pressed[class=&quot;Grapefruit&quot;] {
 }
 
 /*Lavender*/
-QPushButton[class=&quot;Lavender&quot;] {
+QPushButton[class="Lavender"] {
     background-color: #967adc;
 }
 
-QPushButton:hover[class=&quot;Lavender&quot;] {
+QPushButton:hover[class="Lavender"] {
     background-color: #ac92ec;
 }
 
-QPushButton:pressed[class=&quot;Lavender&quot;] {
+QPushButton:pressed[class="Lavender"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -218,15 +202,15 @@ QPushButton:pressed[class=&quot;Lavender&quot;] {
 }
 
 /*PinkRose*/
-QPushButton[class=&quot;PinkRose&quot;] {
+QPushButton[class="PinkRose"] {
     background-color: #d770ad;
 }
 
-QPushButton:hover[class=&quot;PinkRose&quot;] {
+QPushButton:hover[class="PinkRose"] {
     background-color: #ec87c0;
 }
 
-QPushButton:pressed[class=&quot;PinkRose&quot;] {
+QPushButton:pressed[class="PinkRose"] {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -262,7 +246,7 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-    image: url(&quot;%PATH%/img/more.png&quot;);
+    image: url("%PATH%/img/more.png");
     padding-right: 10px;
     padding-top: 2px;
 
@@ -348,19 +332,19 @@ QProgressBar::chunk{
     border-radius: 3px;
 }
 
-QProgressBar::chunk[class=&quot;Aqua&quot;] {
+QProgressBar::chunk[class="Aqua"] {
     background-color: #3bafda;
 }
 
-QProgressBar::chunk[class=&quot;Grass&quot;] {
+QProgressBar::chunk[class="Grass"] {
     background-color: #8cc152;
 }
 
-QProgressBar::chunk[class=&quot;Sunflower&quot;] {
+QProgressBar::chunk[class="Sunflower"] {
     background-color: #f6bb42;
 }
 
-QProgressBar::chunk[class=&quot;Grapefruit&quot;] {
+QProgressBar::chunk[class="Grapefruit"] {
     background-color: #da4453;
 }
 
@@ -708,203 +692,3 @@ QTreeWidget::branch:open:has-children:!has-siblings {
     margin-bottom: 2px;
     image: url('%PATH%/img/minus.png');
 }
-</string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="7">
-       <widget class="QTextBrowser" name="articleShower">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="autoFormatting">
-         <set>QTextEdit::AutoAll</set>
-        </property>
-        <property name="html">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto'; font-size:15pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="openExternalLinks">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="5">
-       <widget class="QListWidget" name="mainCol">
-        <property name="font">
-         <font>
-          <family>Microsoft YaHei</family>
-          <pointsize>15</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-          <stylestrategy>PreferDefault</stylestrategy>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="lineWidth">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushButton">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Refresh</string>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="9">
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="8">
-       <spacer name="verticalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1428</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuRSS">
-    <property name="title">
-     <string>RSS</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer"/>
-   </widget>
-   <widget class="QMenu" name="menuTwitter">
-    <property name="title">
-     <string>Twitter</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer_2"/>
-   </widget>
-   <widget class="QMenu" name="menuReddit">
-    <property name="title">
-     <string>Reddit</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer_3"/>
-   </widget>
-   <widget class="QMenu" name="menuSources_Primitives">
-    <property name="title">
-     <string>Sources Primitives</string>
-    </property>
-    <addaction name="actionD_sactiver"/>
-   </widget>
-   <addaction name="menuRSS"/>
-   <addaction name="menuTwitter"/>
-   <addaction name="menuReddit"/>
-   <addaction name="menuSources_Primitives"/>
-  </widget>
-  <action name="actionAjouter_Supprimer">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionAjouter_Supprimer_2">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionAjouter_Supprimer_3">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionD_sactiver">
-   <property name="text">
-    <string>Désactiver</string>
-   </property>
-  </action>
- </widget>
- <resources/>
- <connections/>
-</ui>

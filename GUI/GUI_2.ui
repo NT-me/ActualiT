@@ -2,41 +2,55 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1428</width>
-    <height>885</height>
+    <width>1049</width>
+    <height>762</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <property name="styleSheet">
    <string notr="true">* {
-    font-family: &quot;Roboto&quot;;
+    font-family: &quot;Microsoft YaHei&quot;;
 }
 
 /*QPushButton*/
 QPushButton {
     color: #fff;
-		background-color: #cccccc;
-    border: 1px solid rgba(0, 255, 255, 0);
+    border: 0px solid rgba(255, 255, 255, 0);
     font-size: 12px;
     font-weight: 700;
 }
 
 /*MediumGray*/
-QPushButton[class=&quot;MediumGray&quot;] {
+QPushButton{
     background-color: #aab2bd;
 }
 
-QPushButton:hover[class=&quot;MediumGray&quot;] {
+QPushButton:hover {
     background-color: #ccd1d9;
 }
 
-QPushButton:pressed[class=&quot;MediumGray&quot;] {
+QPushButton:pressed {
     background: qradialgradient(cx:0.5,
     cy: 0.5,
     fx: 0.5,
@@ -710,201 +724,283 @@ QTreeWidget::branch:open:has-children:!has-siblings {
 }
 </string>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <spacer name="verticalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="7">
-       <widget class="QTextBrowser" name="articleShower">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="autoFormatting">
-         <set>QTextEdit::AutoAll</set>
-        </property>
-        <property name="html">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" rowspan="3">
+     <widget class="QWidget" name="verticalDock" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>183</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>183</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="rightMargin">
+        <number>1</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="refreshButton">
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <pointsize>-1</pointsize>
+           <weight>87</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Refresh</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolBox" name="toolBox">
+         <property name="currentIndex">
+          <number>3</number>
+         </property>
+         <property name="tabSpacing">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="RSS_Button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>173</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>RSS</string>
+          </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>171</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QPushButton" name="RSS_manage">
+              <property name="text">
+               <string>Manage</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Reddit_button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>173</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>Reddit</string>
+          </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>171</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QPushButton" name="RSS_manage_2">
+              <property name="text">
+               <string>Manage</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Twitter_button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>173</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>Twitter</string>
+          </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_4">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>171</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QPushButton" name="RSS_manage_3">
+              <property name="text">
+               <string>Manage</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Primi_Button">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>173</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>Source Primitive</string>
+          </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_5">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>171</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QPushButton" name="RSS_manage_4">
+              <property name="text">
+               <string>Manage</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QListWidget" name="mainCol">
+          <property name="font">
+           <font>
+            <family>Microsoft YaHei</family>
+            <pointsize>15</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="lineWidth">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="articleShower">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="autoFormatting">
+           <set>QTextEdit::AutoAll</set>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto'; font-size:15pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="openExternalLinks">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="5">
-       <widget class="QListWidget" name="mainCol">
-        <property name="font">
-         <font>
-          <family>Microsoft YaHei</family>
-          <pointsize>15</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-          <stylestrategy>PreferDefault</stylestrategy>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="lineWidth">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushButton">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Refresh</string>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="9">
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="8">
-       <spacer name="verticalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1428</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuRSS">
-    <property name="title">
-     <string>RSS</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer"/>
-   </widget>
-   <widget class="QMenu" name="menuTwitter">
-    <property name="title">
-     <string>Twitter</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer_2"/>
-   </widget>
-   <widget class="QMenu" name="menuReddit">
-    <property name="title">
-     <string>Reddit</string>
-    </property>
-    <addaction name="actionAjouter_Supprimer_3"/>
-   </widget>
-   <widget class="QMenu" name="menuSources_Primitives">
-    <property name="title">
-     <string>Sources Primitives</string>
-    </property>
-    <addaction name="actionD_sactiver"/>
-   </widget>
-   <addaction name="menuRSS"/>
-   <addaction name="menuTwitter"/>
-   <addaction name="menuReddit"/>
-   <addaction name="menuSources_Primitives"/>
-  </widget>
-  <action name="actionAjouter_Supprimer">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionAjouter_Supprimer_2">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionAjouter_Supprimer_3">
-   <property name="text">
-    <string>Ajouter/Supprimer</string>
-   </property>
-  </action>
-  <action name="actionD_sactiver">
-   <property name="text">
-    <string>Désactiver</string>
-   </property>
-  </action>
  </widget>
+ <tabstops>
+  <tabstop>RSS_manage_2</tabstop>
+  <tabstop>RSS_manage_3</tabstop>
+  <tabstop>RSS_manage_4</tabstop>
+  <tabstop>toolButton</tabstop>
+  <tabstop>RSS_manage</tabstop>
+  <tabstop>refreshButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
