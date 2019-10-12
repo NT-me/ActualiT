@@ -1,12 +1,107 @@
 # -*- coding: utf-8 -*-
 from tinydb import TinyDB, Query
-from FillmainCol.scrapers.utils import Article
+from objects.article import Article
+from objects.source import Source
 import os
 
 PATH_DB = str(os.getcwd()+"/mainCol.json")
 db = TinyDB(PATH_DB)
+artDB = db.table('articles')
+sourcesDB = db.table('sources')
+
+# Source methods
+def insertSource(S):
+    """
+    Insert an source in the db
+
+    param -> Article
+    return -> Document ID
+    """
+    if sourcesDB.search(Query().ID == S.ID) == []:
+        return sourcesDB.insert(S.__dict__)
+    else :
+        return -1
 
 
+def insertSources(L):
+    """
+    Insert an source in the DB
+
+    param -> List with sources
+    return -> List with document ID
+    """
+    res = list()
+    for item in L:
+        if type(item) != Source:
+            print(item)
+            raise ValueError("Items in lists are not Source")
+            return -1
+        res.append(insertArticle(item))
+    return res
+
+
+def readSource(ID):
+    """
+    Take back an source from DB
+
+    ID -> Source ID
+    return -> The Source requested
+    """
+    S = Source()
+    DictSou = sourcesDB.search(Query().ID == ID)
+    if DictSou == []:
+        return -1
+    else:
+        for key in DictSou[0]:
+            setattr(A, key, DictSou[0][key])
+
+    return S
+
+
+def readArticles(LID):
+    """
+    Take back an sources's list
+
+    param -> ID list
+    return -> Sources list
+    """
+    res = list()
+    for id in LID:
+        s = readSource(id)
+        if type(s) == Source:
+            res.append(s)
+
+    return res
+
+
+def readAllSources():
+    """
+    Return an list with all sources
+    """
+    listDict = sourcesDB.all()
+
+    res = list()
+
+    for sou in listDict:
+        S = Source()
+        for key in sou:
+            setattr(S, key, sou[key])
+        res.append(S)
+
+    return res
+
+def readTypedSources(TYPE):
+    listDict = sourcesDB.search(Query().type == TYPE)
+    res = list()
+
+    for sou in listDict:
+        S = Source()
+        for key in sou:
+            setattr(S, key, sou[key])
+        res.append(S)
+    return res
+
+# Articles methods
 def insertArticle(A):
     """
     Insert an article in the DB
@@ -14,8 +109,8 @@ def insertArticle(A):
     param -> Article
     return -> Document ID
     """
-    if db.search(Query().titre == A.titre) == []:
-        return db.insert(A.__dict__)
+    if artDB.search(Query().titre == A.titre) == []:
+        return artDB.insert(A.__dict__)
     else:
         return -1
 
@@ -45,7 +140,7 @@ def readArticle(ID):
     return -> The Article requested
     """
     A = Article()
-    DictArt = db.search(Query().ID == ID)
+    DictArt = artDB.search(Query().ID == ID)
     if DictArt == []:
         return -1
     else:
@@ -75,7 +170,7 @@ def readAllArticles():
     """
     Return an list with all articles
     """
-    listDict = db.all()
+    listDict = artDB.all()
 
     res = list()
 

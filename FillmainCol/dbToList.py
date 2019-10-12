@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from FillmainCol import wrapperDB as wdb
-from FillmainCol.scrapers.utils import Article
+from objects.article import Article
 from tinydb import TinyDB
 import time
 

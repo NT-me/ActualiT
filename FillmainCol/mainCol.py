@@ -8,7 +8,7 @@ import re
 from FillmainCol.scrapers import utils as u
 from threading import Thread
 from . import dbToList as dbt
-from FillmainCol.scrapers.utils import Article
+from objects.article import Article
 from FillmainCol import wrapperDB as wdb
 from queue import Queue
 
