@@ -8,6 +8,7 @@ from FillmainCol import mainCol
 import time
 from threading import Thread
 from GUI.GUI_2 import Ui_MainWindow
+from GUI.ajout_source import Ui_Dialog
 import sys
 from FillmainCol.scrapers import utils as u
 from FillmainCol import wrapperDB as wdb
@@ -40,6 +41,21 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.setWindowIcon(QIcon('icon.png'))
         self.ui.refreshButton.clicked.connect(self.buttonClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
+        self.ui.RSS_manage.clicked.connect(self.openWindow)
+
+
+
+    def openWindow(self):
+        self.window = QtWidgets.QDialog()
+        self.D = Ui_Dialog()
+        self.D.setupUi(self.window)
+        self.window.show()
+        self.D.ajoutButton.clicked.connect(self.D.addSource)
+
+        def addSource(self):
+            text = self.D.addSourceLine.text()
+            print(text)
+
 
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
@@ -74,6 +90,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
                 contenu = ''
             self.ui.articleShower.clear()
             self.ui.articleShower.append(Mart.model(article))
+
 
 
 if __name__ == "__main__":
