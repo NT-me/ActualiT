@@ -107,6 +107,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
+        self.ui.mainCol.clear()
 
         def getDate(article):
             return article.date

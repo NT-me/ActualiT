@@ -14,9 +14,8 @@ def askReddit():
 
 	# Parcours la liste de source
 	for item in liste:
-		item = item.link
-		if item[len(item)-1] == '/':
-			item = item[:len(item)-1]+".rss"
+		if item.link[len(item.link)-1] == '/':
+			item = item.link[:len(item.link)-1]+".rss"
 		else:
 			item = item+".rss"
 		parse = fp.parse(item).entries
