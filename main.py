@@ -121,7 +121,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
                 self.ui.mainCol.addItem(Qitem)
         self.old_List = liste
 
-
+    @u.MTime
     def item_click(self, item):
         id = item.data(Qt.UserRole)
         if id != 0:

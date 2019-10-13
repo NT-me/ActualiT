@@ -2,6 +2,8 @@ from tweetscrape.profile_tweets import TweetScrapperProfile as ts
 from . import utils as u
 from threading import Thread
 from queue import Queue
+from FillmainCol import wrapperDB as wdb
+
 
 PATH_FileRes = "tweetRES.json"
 
@@ -14,14 +16,14 @@ class TwitterWork(Thread):
 
 	def run(self):
 		item = self.queueIn.get()
-		res = ts(item, 10, PATH_FileRes, "json")
+		res = ts(item.link, 10, PATH_FileRes, "json")
 		self.queueOut.put(res)
 		self.queueIn.task_done()
 
 
 def askTwitter():
 	print("--=Start twitter=--")
-	liste = u.TxtToList(open('FillmainCol/scrapers/twitter_list.txt'))
+	liste = wdb.readOriginSources('Twitter')
 	thread_count = len(liste)
 	queueIn = Queue()
 	queueOut = Queue()

@@ -1,19 +1,20 @@
 import feedparser as fp
 import json
 from . import utils as u
+from FillmainCol import wrapperDB as wdb
 
 PATH_FileRes = "redditRES.json"
 
 
 def askReddit():
 	# Liste des feeds
-	FILE_liste = open("FillmainCol/scrapers/reddit_list.txt", "r")
-	liste = u.TxtToList(FILE_liste)
+	liste = wdb.readOriginSources('Reddit')
 	res = dict()
 	inc = 0
 
 	# Parcours la liste de source
 	for item in liste:
+		item = item.link
 		if item[len(item)-1] == '/':
 			item = item[:len(item)-1]+".rss"
 		else:
