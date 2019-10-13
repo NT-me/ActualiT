@@ -780,7 +780,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <property name="tabSpacing">
           <number>0</number>
@@ -840,7 +840,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QPushButton" name="RSS_manage_2">
+             <widget class="QPushButton" name="Reddit_manage">
               <property name="text">
                <string>Manage</string>
               </property>
@@ -872,7 +872,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QPushButton" name="RSS_manage_3">
+             <widget class="QPushButton" name="Twitter_manage">
               <property name="text">
                <string>Manage</string>
               </property>
@@ -994,8 +994,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>RSS_manage_2</tabstop>
-  <tabstop>RSS_manage_3</tabstop>
+  <tabstop>Reddit_manage</tabstop>
+  <tabstop>Twitter_manage</tabstop>
   <tabstop>RSS_manage_4</tabstop>
   <tabstop>toolButton</tabstop>
   <tabstop>RSS_manage</tabstop>

@@ -90,8 +90,8 @@ def readAllSources():
 
     return res
 
-def readTypedSources(TYPE):
-    listDict = sourcesDB.search(Query().type == TYPE)
+def readOriginSources(origin):
+    listDict = sourcesDB.search(Query().origin == origin)
     res = list()
 
     for sou in listDict:

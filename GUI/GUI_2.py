@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI_2.ui'
+# Form implementation generated from reading ui file 'GUI/GUI_2.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.1
 #
@@ -32,7 +32,6 @@ class Ui_MainWindow(object):
 "    border: 0px solid rgba(255, 255, 255, 0);\n"
 "    font-size: 12px;\n"
 "    font-weight: 700;\n"
-"    border-radius: 5px;\n"
 "}\n"
 "\n"
 "/*MediumGray*/\n"
@@ -770,9 +769,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.RSS_manage_2 = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
-        self.RSS_manage_2.setObjectName("RSS_manage_2")
-        self.verticalLayout_3.addWidget(self.RSS_manage_2)
+        self.Reddit_manage = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
+        self.Reddit_manage.setObjectName("Reddit_manage")
+        self.verticalLayout_3.addWidget(self.Reddit_manage)
         self.toolBox.addItem(self.Reddit_button, "")
         self.Twitter_button = QtWidgets.QWidget()
         self.Twitter_button.setGeometry(QtCore.QRect(0, 0, 173, 541))
@@ -783,9 +782,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.RSS_manage_3 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
-        self.RSS_manage_3.setObjectName("RSS_manage_3")
-        self.verticalLayout_4.addWidget(self.RSS_manage_3)
+        self.Twitter_manage = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        self.Twitter_manage.setObjectName("Twitter_manage")
+        self.verticalLayout_4.addWidget(self.Twitter_manage)
         self.toolBox.addItem(self.Twitter_button, "")
         self.Primi_Button = QtWidgets.QWidget()
         self.Primi_Button.setGeometry(QtCore.QRect(0, 0, 173, 541))
@@ -839,11 +838,11 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.toolBox.setCurrentIndex(3)
+        self.toolBox.setCurrentIndex(2)
         self.toolBox.layout().setSpacing(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        MainWindow.setTabOrder(self.RSS_manage_2, self.RSS_manage_3)
-        MainWindow.setTabOrder(self.RSS_manage_3, self.RSS_manage_4)
+        MainWindow.setTabOrder(self.Reddit_manage, self.Twitter_manage)
+        MainWindow.setTabOrder(self.Twitter_manage, self.RSS_manage_4)
         MainWindow.setTabOrder(self.RSS_manage_4, self.toolButton)
         MainWindow.setTabOrder(self.toolButton, self.RSS_manage)
         MainWindow.setTabOrder(self.RSS_manage, self.refreshButton)
@@ -854,9 +853,9 @@ class Ui_MainWindow(object):
         self.refreshButton.setText(_translate("MainWindow", "Refresh"))
         self.RSS_manage.setText(_translate("MainWindow", "Manage"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.RSS_Button), _translate("MainWindow", "RSS"))
-        self.RSS_manage_2.setText(_translate("MainWindow", "Manage"))
+        self.Reddit_manage.setText(_translate("MainWindow", "Manage"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.Reddit_button), _translate("MainWindow", "Reddit"))
-        self.RSS_manage_3.setText(_translate("MainWindow", "Manage"))
+        self.Twitter_manage.setText(_translate("MainWindow", "Manage"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.Twitter_button), _translate("MainWindow", "Twitter"))
         self.RSS_manage_4.setText(_translate("MainWindow", "Manage"))
         self.toolBox.setItemText(self.toolBox.indexOf(self.Primi_Button), _translate("MainWindow", "Source Primitive"))

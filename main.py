@@ -14,6 +14,8 @@ from FillmainCol.scrapers import utils as u
 from FillmainCol import wrapperDB as wdb
 from Model import article as Mart
 import os
+from objects.source import Source
+from sources import newSource as ns
 
 
 class MainColWork(Thread):
@@ -39,22 +41,68 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle("ActualiT")
         self.setWindowIcon(QIcon('icon.png'))
+        self.D = Ui_Dialog()
         self.ui.refreshButton.clicked.connect(self.buttonClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
-        self.ui.RSS_manage.clicked.connect(self.openWindow)
+        self.ui.RSS_manage.clicked.connect(self.openRSSManager)
+        self.ui.Twitter_manage.clicked.connect(self.openTwitterManager)
+        self.ui.Reddit_manage.clicked.connect(self.openRedditManager)
 
 
+    def updatetab(self, origin):
+        liste = wdb.readOriginSources(origin)
+        count = 0
+        for i in reversed(range(self.D.tabSource.rowCount())):
+            self.D.tabSource.removeRow(i)
+        for item in liste :
+            self.D.tabSource.insertRow(count)
+            self.D.tabSource.setItem(count,0, QtWidgets.QTableWidgetItem(item.name))
+            count =+ 1
 
-    def openWindow(self):
+
+    def openRSSManager(self):
         self.window = QtWidgets.QDialog()
-        self.D = Ui_Dialog()
         self.D.setupUi(self.window)
         self.window.show()
-        self.D.ajoutButton.clicked.connect(self.D.addSource)
+        self.D.ajoutButton.clicked.connect(self.addRSSSource)
+        self.updatetab('RSS')
 
-        def addSource(self):
-            text = self.D.addSourceLine.text()
-            print(text)
+    def openTwitterManager(self):
+        self.window = QtWidgets.QDialog()
+        self.D.setupUi(self.window)
+        self.window.show()
+        self.D.ajoutButton.clicked.connect(self.addTwitterSource)
+        self.updatetab('Twitter')
+
+
+
+    def openRedditManager(self):
+        self.window = QtWidgets.QDialog()
+        self.D.setupUi(self.window)
+        self.window.show()
+        self.D.ajoutButton.clicked.connect(self.addRedditSource)
+        self.updatetab('Reddit')
+
+
+    def addRSSSource(self):
+        text = self.D.addSourceLine.text()
+        ns.add(text, 'RSS')
+        self.updatetab('RSS')
+
+
+
+    def addTwitterSource(self):
+        text = self.D.addSourceLine.text()
+        ns.add(text, 'Twitter')
+        self.updatetab('Twitter')
+
+
+
+    def addRedditSource(self):
+        text = self.D.addSourceLine.text()
+        ns.add(text, 'Reddit')
+        self.updatetab('Reddit')
+
 
 
     def buttonClicked(self):
@@ -72,6 +120,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
                 Qitem.setData(Qt.UserRole, item.ID)
                 self.ui.mainCol.addItem(Qitem)
         self.old_List = liste
+
 
     def item_click(self, item):
         id = item.data(Qt.UserRole)
