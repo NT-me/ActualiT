@@ -15,14 +15,17 @@ from queue import Queue
 
 def reader(nom_file):
 	# Lit du fichier et transormation en dico
-	File = open(nom_file, "r")
 	article = dict()
 	try:
-		article = json.loads(File.read())
-	except:
-		pass
-	File.close()
-	os.remove(nom_file)
+		File = open(nom_file, "r")
+		try:
+			article = json.loads(File.read())
+		except:
+			pass
+		File.close()
+		os.remove(nom_file)
+	except FileNotFoundError:
+		print(nom_file + ' introuvable.\n')
 
 	return article
 
@@ -107,6 +110,7 @@ def parseFeed():
 	print("===- Feed START -===")
 	for i in articleFEED:
 		for item in articleFEED[i]:
+			print(i)
 			titre = item["title"]
 			try:
 				auteur = item["author"]

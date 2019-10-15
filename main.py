@@ -86,6 +86,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def addRSSSource(self):
         text = self.D.addSourceLine.text()
+        self.D.addSourceLine.clear()
         ns.add(text, 'RSS')
         self.updatetab('RSS')
 
@@ -93,6 +94,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def addTwitterSource(self):
         text = self.D.addSourceLine.text()
+        self.D.addSourceLine.clear()
         ns.add(text, 'Twitter')
         self.updatetab('Twitter')
 
@@ -100,6 +102,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def addRedditSource(self):
         text = self.D.addSourceLine.text()
+        self.D.addSourceLine.clear()
         ns.add(text, 'Reddit')
         self.updatetab('Reddit')
 

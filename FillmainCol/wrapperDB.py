@@ -9,6 +9,7 @@ db = TinyDB(PATH_DB)
 artDB = db.table('articles')
 sourcesDB = db.table('sources')
 
+
 # Source methods
 def insertSource(S):
     """
@@ -19,7 +20,7 @@ def insertSource(S):
     """
     if sourcesDB.search(Query().ID == S.ID) == []:
         return sourcesDB.insert(S.__dict__)
-    else :
+    else:
         return -1
 
 
@@ -53,12 +54,12 @@ def readSource(ID):
         return -1
     else:
         for key in DictSou[0]:
-            setattr(A, key, DictSou[0][key])
+            setattr(S, key, DictSou[0][key])
 
     return S
 
 
-def readArticles(LID):
+def readSources(LID):
     """
     Take back an sources's list
 
@@ -90,9 +91,12 @@ def readAllSources():
 
     return res
 
+
 def readOriginSources(origin):
     listDict = sourcesDB.search(Query().origin == origin)
     res = list()
+    if listDict == []:
+        return res
 
     for sou in listDict:
         S = Source()
@@ -100,6 +104,7 @@ def readOriginSources(origin):
             setattr(S, key, sou[key])
         res.append(S)
     return res
+
 
 # Articles methods
 def insertArticle(A):
