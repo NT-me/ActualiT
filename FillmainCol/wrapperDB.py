@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 import json
 from objects.article import Article
 from objects.source import Source
@@ -99,7 +99,7 @@ def readAllSources():
 
 def readOriginSources(origin):
     try:
-        listDict = sourcesDB.search(Query().origin == origin)
+        listDict = sourcesDB.search(where('origin') == origin)
     except json.decoder.JSONDecodeError as e:
         print(str(e) + "\n")
         listDict = list()
