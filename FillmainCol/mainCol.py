@@ -110,7 +110,6 @@ def parseFeed():
 	print("===- Feed START -===")
 	for i in articleFEED:
 		for item in articleFEED[i]:
-			print(i)
 			titre = item["title"]
 			try:
 				auteur = item["author"]
@@ -178,7 +177,7 @@ def parseTwitter():
 			pass
 		auteur = item["author"]
 		info_source = item["type"]
-		lien = "https://www.twitter.com/home/"+item["id"]
+		lien = "https://twitter.com/statuses/"+item["id"]
 		resume = item["text"]
 		try:
 			lien_img = item["entries"]["photos"][0]

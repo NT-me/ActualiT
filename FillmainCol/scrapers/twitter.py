@@ -20,6 +20,7 @@ class TwitterWork(Thread):
 		item = self.queueIn.get()
 		test = requests.get('https://twitter.com/{username}'.format(username=item.link))
 		if test.status_code == 404:
+			print('{username} does\'nt exist'.format(username=item.link))
 			res = dict()
 		else:
 			res = ts(item.link, 10, PATH_FileRes, "json")
@@ -31,6 +32,7 @@ def askTwitter():
 	print("--=Start twitter=--")
 	liste = wdb.readOriginSources('Twitter')
 	if liste != []:
+		res = dict()
 		thread_count = len(liste)
 		queueIn = Queue()
 		queueOut = Queue()
@@ -44,9 +46,9 @@ def askTwitter():
 			queueIn.put(compte)
 		queueIn.join()
 
-		while queueOut.empty() == False:
+		while not queueOut.empty():
 			res = queueOut.get()
-			if res != {}:
+			if not isinstance(res, dict):
 				res.get_profile_tweets()
 		queueOut.task_done()
 	else:

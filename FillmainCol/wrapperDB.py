@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 from tinydb import TinyDB, Query
+import json
 from objects.article import Article
 from objects.source import Source
 import os
 
-PATH_DB = str(os.getcwd()+"/mainCol.json")
-db = TinyDB(PATH_DB)
-artDB = db.table('articles')
-sourcesDB = db.table('sources')
+#PATH_DB = str(os.getcwd()+"/mainCol.json")
+#db = TinyDB(PATH_DB)
+#artDB = db.table('articles')
+#sourcesDB = db.table('sources')
+
+artDB = TinyDB("mainCol.json")
+sourcesDB = TinyDB("sourcedb.json")
 
 
 # Source methods
@@ -49,7 +53,8 @@ def readSource(ID):
     return -> The Source requested
     """
     S = Source()
-    DictSou = sourcesDB.search(Query().ID == ID)
+    Qsource = Query()
+    DictSou = sourcesDB.search(Qsource["ID"] == ID)
     if DictSou == []:
         return -1
     else:
@@ -93,8 +98,14 @@ def readAllSources():
 
 
 def readOriginSources(origin):
-    listDict = sourcesDB.search(Query().origin == origin)
+    try:
+        listDict = sourcesDB.search(Query().origin == origin)
+    except json.decoder.JSONDecodeError as e:
+        print(str(e) + "\n")
+        listDict = list()
+
     res = list()
+    #print(origin + str(listDict))
     if listDict == []:
         return res
 
@@ -130,7 +141,6 @@ def insertArticles(L):
     res = list()
     for item in L:
         if type(item) != Article:
-            print(item)
             raise ValueError("Items in lists are not Article")
             return -1
         res.append(insertArticle(item))

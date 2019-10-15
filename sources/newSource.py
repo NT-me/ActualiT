@@ -17,5 +17,8 @@ def add(url, origin):
         if url[0] != "@":
             name = "@" + url
     S = Source(ID, name, url, origin)
-    wdb.insertSource(S)
-    print("source OK\n")
+    code = wdb.insertSource(S)
+    if code != -1:
+        print("source OK\n")
+    else :
+        print("source problem")
