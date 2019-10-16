@@ -36,7 +36,6 @@ def MainColWorkFunc():
 class GUIActualiT(QtWidgets.QMainWindow):
     def __init__(self, title="Default", parent=None):
         super(GUIActualiT, self).__init__(parent)
-        self.old_List = []
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("ActualiT")
@@ -48,17 +47,18 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.Twitter_manage.clicked.connect(self.openTwitterManager)
         self.ui.Reddit_manage.clicked.connect(self.openRedditManager)
 
-
     def updatetab(self, origin):
+        Qitem = QtWidgets.QTableWidgetItem()
         liste = wdb.readOriginSources(origin)
         count = 0
         for i in reversed(range(self.D.tabSource.rowCount())):
             self.D.tabSource.removeRow(i)
-        for item in liste :
+        for item in liste:
             self.D.tabSource.insertRow(count)
-            self.D.tabSource.setItem(count,0, QtWidgets.QTableWidgetItem(item.name))
-            count =+ 1
-
+            Qitem.setText(item.name)
+            Qitem.setData(Qt.UserRole, item.ID)
+            self.D.tabSource.setItem(count, 0, Qitem)
+            count = + 1
 
     def openRSSManager(self):
         self.window = QtWidgets.QDialog()
@@ -108,13 +108,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
         liste = sorted(liste, key=getDate, reverse=True)
         for item in liste:
-            if item not in self.old_List:
-                date = str(time.ctime(item.date))
-                Qitem = QtWidgets.QListWidgetItem()
-                Qitem.setText(str(item.titre)+' | '+date)
-                Qitem.setData(Qt.UserRole, item.ID)
-                self.ui.mainCol.addItem(Qitem)
-        self.old_List = liste
+            date = str(time.ctime(item.date))
+            Qitem = QtWidgets.QListWidgetItem()
+            Qitem.setText(str(item.titre)+' | '+date)
+            Qitem.setData(Qt.UserRole, item.ID)
+            self.ui.mainCol.addItem(Qitem)
 
     @u.MTime
     def item_click(self, item):
