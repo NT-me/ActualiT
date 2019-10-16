@@ -11,7 +11,7 @@ import os
 #sourcesDB = db.table('sources')
 
 artDB = TinyDB("mainCol.json")
-sourcesDB = TinyDB("sourcedb.json")
+sourcesDB = TinyDB("Sdb.json")
 
 
 # Source methods
@@ -22,7 +22,9 @@ def insertSource(S):
     param -> Article
     return -> Document ID
     """
+    sourcesDB = TinyDB("Sdb.json")
     if sourcesDB.search(Query().ID == S.ID) == []:
+        #sourcesDB.close()
         return sourcesDB.insert(S.__dict__)
     else:
         return -1
@@ -35,13 +37,17 @@ def insertSources(L):
     param -> List with sources
     return -> List with document ID
     """
+    sourcesDB = TinyDB("Sdb.json")
     res = list()
     for item in L:
         if type(item) != Source:
             print(item)
             raise ValueError("Items in lists are not Source")
+            sourcesDB.close()
             return -1
         res.append(insertArticle(item))
+
+    sourcesDB.close()
     return res
 
 
@@ -52,15 +58,18 @@ def readSource(ID):
     ID -> Source ID
     return -> The Source requested
     """
+    sourcesDB = TinyDB("Sdb.json")
     S = Source()
     Qsource = Query()
     DictSou = sourcesDB.search(Qsource["ID"] == ID)
     if DictSou == []:
+        sourcesDB.close()
         return -1
     else:
         for key in DictSou[0]:
             setattr(S, key, DictSou[0][key])
 
+    sourcesDB.close()
     return S
 
 
@@ -76,7 +85,6 @@ def readSources(LID):
         s = readSource(id)
         if type(s) == Source:
             res.append(s)
-
     return res
 
 
@@ -84,6 +92,7 @@ def readAllSources():
     """
     Return an list with all sources
     """
+    sourcesDB = TinyDB("Sdb.json")
     listDict = sourcesDB.all()
 
     res = list()
@@ -94,10 +103,12 @@ def readAllSources():
             setattr(S, key, sou[key])
         res.append(S)
 
+    sourcesDB.close()
     return res
 
 
 def readOriginSources(origin):
+    sourcesDB = TinyDB("Sdb.json")
     try:
         listDict = sourcesDB.search(where('origin') == origin)
     except json.decoder.JSONDecodeError as e:
@@ -107,6 +118,7 @@ def readOriginSources(origin):
     res = list()
     #print(origin + str(listDict))
     if listDict == []:
+        #sourcesDB.close()
         return res
 
     for sou in listDict:
@@ -114,6 +126,7 @@ def readOriginSources(origin):
         for key in sou:
             setattr(S, key, sou[key])
         res.append(S)
+    sourcesDB.close()
     return res
 
 
@@ -125,9 +138,12 @@ def insertArticle(A):
     param -> Article
     return -> Document ID
     """
+    artDB = TinyDB("mainCol.json")
     if artDB.search(Query().titre == A.titre) == []:
+        sourcesDB.close()
         return artDB.insert(A.__dict__)
     else:
+        sourcesDB.close()
         return -1
 
 
@@ -144,6 +160,7 @@ def insertArticles(L):
             raise ValueError("Items in lists are not Article")
             return -1
         res.append(insertArticle(item))
+
     return res
 
 
@@ -154,14 +171,17 @@ def readArticle(ID):
     ID -> article object
     return -> The Article requested
     """
+    artDB = TinyDB("mainCol.json")
     A = Article()
     DictArt = artDB.search(Query().ID == ID)
     if DictArt == []:
+        artDB.close()
         return -1
     else:
         for key in DictArt[0]:
             setattr(A, key, DictArt[0][key])
 
+    artDB.close()
     return A
 
 
@@ -185,6 +205,8 @@ def readAllArticles():
     """
     Return an list with all articles
     """
+    artDB = TinyDB("mainCol.json")
+
     listDict = artDB.all()
 
     res = list()
@@ -195,4 +217,5 @@ def readAllArticles():
             setattr(A, key, art[key])
         res.append(A)
 
+    artDB.close()
     return res

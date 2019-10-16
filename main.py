@@ -74,8 +74,6 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.D.ajoutButton.clicked.connect(self.addTwitterSource)
         self.updatetab('Twitter')
 
-
-
     def openRedditManager(self):
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
@@ -83,14 +81,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.D.ajoutButton.clicked.connect(self.addRedditSource)
         self.updatetab('Reddit')
 
-
     def addRSSSource(self):
         text = self.D.addSourceLine.text()
         self.D.addSourceLine.clear()
         ns.add(text, 'RSS')
         self.updatetab('RSS')
-
-
 
     def addTwitterSource(self):
         text = self.D.addSourceLine.text()
@@ -98,15 +93,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
         ns.add(text, 'Twitter')
         self.updatetab('Twitter')
 
-
-
     def addRedditSource(self):
         text = self.D.addSourceLine.text()
         self.D.addSourceLine.clear()
         ns.add(text, 'Reddit')
         self.updatetab('Reddit')
-
-
 
     def buttonClicked(self):
         liste = mainCol.gen_mainCol()
@@ -143,7 +134,6 @@ class GUIActualiT(QtWidgets.QMainWindow):
                 contenu = ''
             self.ui.articleShower.clear()
             self.ui.articleShower.append(Mart.model(article))
-
 
 
 if __name__ == "__main__":

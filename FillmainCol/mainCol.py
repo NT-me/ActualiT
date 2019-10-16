@@ -117,7 +117,10 @@ def parseFeed():
 				auteur = None
 			info_source = item["source"]
 			lien = item["link"]
-			resume = item["summary"]
+			try:
+				resume = item["summary"]
+			except:
+				resume = None
 			try:
 				lien_img = item["links"][1]["href"]
 			except:
