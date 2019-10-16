@@ -3,6 +3,7 @@ from tinydb import TinyDB, Query, where
 import json
 from objects.article import Article
 from objects.source import Source
+from FillmainCol.scrapers import utils as u
 import os
 
 #PATH_DB = str(os.getcwd()+"/mainCol.json")
@@ -24,7 +25,6 @@ def insertSource(S):
     """
     sourcesDB = TinyDB("Sdb.json")
     if sourcesDB.search(Query().ID == S.ID) == []:
-        #sourcesDB.close()
         return sourcesDB.insert(S.__dict__)
     else:
         return -1
@@ -131,22 +131,24 @@ def readOriginSources(origin):
 
 
 # Articles methods
-def insertArticle(A):
+def insertArticle(A, inIAs=False):
     """
     Insert an article in the DB
 
-    param -> Article
+    param -> Article and if it's in insertArticles()
     return -> Document ID
     """
-    artDB = TinyDB("mainCol.json")
     if artDB.search(Query().titre == A.titre) == []:
-        sourcesDB.close()
+        if not inIAs:
+            artDB.close()
         return artDB.insert(A.__dict__)
     else:
-        sourcesDB.close()
+        if not inIAs:
+            artDB.close()
         return -1
 
 
+@u.MTime
 def insertArticles(L):
     """
     Insert an article in the DB
@@ -154,12 +156,14 @@ def insertArticles(L):
     param -> List with article
     return -> List with document ID
     """
+    artDB = TinyDB("mainCol.json")
     res = list()
     for item in L:
         if type(item) != Article:
             raise ValueError("Items in lists are not Article")
             return -1
-        res.append(insertArticle(item))
+        res.append(insertArticle(item, True))
+    artDB.close()
 
     return res
 

@@ -5,6 +5,7 @@ from time import process_time
 
 PATH_DB = "mainCol.json"
 
+
 def MTime(func):
     def wrapper(*args, **kwargs):
         t = process_time()
