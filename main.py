@@ -48,12 +48,12 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.Reddit_manage.clicked.connect(self.openRedditManager)
 
     def updatetab(self, origin):
-        Qitem = QtWidgets.QTableWidgetItem()
         liste = wdb.readOriginSources(origin)
         count = 0
         for i in reversed(range(self.D.tabSource.rowCount())):
             self.D.tabSource.removeRow(i)
         for item in liste:
+            Qitem = QtWidgets.QTableWidgetItem()
             self.D.tabSource.insertRow(count)
             Qitem.setText(item.name)
             Qitem.setData(Qt.UserRole, item.ID)
