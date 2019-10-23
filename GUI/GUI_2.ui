@@ -780,7 +780,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
        <item>
         <widget class="QToolBox" name="toolBox">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <property name="tabSpacing">
           <number>0</number>
@@ -791,7 +791,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>541</height>
+            <height>557</height>
            </rect>
           </property>
           <attribute name="label">
@@ -823,7 +823,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>541</height>
+            <height>557</height>
            </rect>
           </property>
           <attribute name="label">
@@ -855,7 +855,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>541</height>
+            <height>557</height>
            </rect>
           </property>
           <attribute name="label">
@@ -887,7 +887,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>541</height>
+            <height>557</height>
            </rect>
           </property>
           <attribute name="label">
@@ -905,6 +905,9 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QPushButton" name="RSS_manage_4">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Manage</string>
               </property>
@@ -917,6 +920,9 @@ QTreeWidget::branch:open:has-children:!has-siblings {
        </item>
        <item>
         <widget class="QToolButton" name="toolButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>...</string>
          </property>
@@ -977,7 +983,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto'; font-size:15pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="openExternalLinks">

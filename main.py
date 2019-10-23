@@ -34,6 +34,7 @@ def MainColWorkFunc():
 
 
 class GUIActualiT(QtWidgets.QMainWindow):
+    cellItem = None
     def __init__(self, title="Default", parent=None):
         super(GUIActualiT, self).__init__(parent)
         self.ui = Ui_MainWindow()
@@ -41,7 +42,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.setWindowTitle("ActualiT")
         self.setWindowIcon(QIcon('icon.png'))
         self.D = Ui_Dialog()
-        self.ui.refreshButton.clicked.connect(self.buttonClicked)
+        self.ui.refreshButton.clicked.connect(self.refreshClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
         self.ui.RSS_manage.clicked.connect(self.openRSSManager)
         self.ui.Twitter_manage.clicked.connect(self.openTwitterManager)
@@ -60,25 +61,55 @@ class GUIActualiT(QtWidgets.QMainWindow):
             self.D.tabSource.setItem(count, 0, Qitem)
             count = + 1
 
+    def deleteSourceRSS(self):
+        if self.cellItem is not None:
+            wdb.suprSource(self.cellItem.data(Qt.UserRole))
+            self.updatetab('RSS')
+            self.cellItem = None
+
+    def deleteSourceReddit(self):
+        if self.cellItem is not None:
+            wdb.suprSource(self.cellItem.data(Qt.UserRole))
+            self.updatetab('Reddit')
+            self.cellItem = None
+
+    def deleteSourceTwitter(self):
+        if self.cellItem is not None:
+            wdb.suprSource(self.cellItem.data(Qt.UserRole))
+            self.updatetab('Twitter')
+            self.cellItem = None
+
+    def cellClickedMemory(self, row, column):
+        self.cellItem = self.D.tabSource.item(row, 0)
+
     def openRSSManager(self):
+        self.cellItem = None
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
         self.window.show()
         self.D.ajoutButton.clicked.connect(self.addRSSSource)
+        self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
+        self.D.supprButton.clicked.connect(self.deleteSourceRSS)
         self.updatetab('RSS')
 
     def openTwitterManager(self):
+        self.cellItem = None
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
         self.window.show()
         self.D.ajoutButton.clicked.connect(self.addTwitterSource)
+        self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
+        self.D.supprButton.clicked.connect(self.deleteSourceTwitter)
         self.updatetab('Twitter')
 
     def openRedditManager(self):
+        self.cellItem = None
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
         self.window.show()
         self.D.ajoutButton.clicked.connect(self.addRedditSource)
+        self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
+        self.D.supprButton.clicked.connect(self.deleteSourceReddit)
         self.updatetab('Reddit')
 
     def addRSSSource(self):
@@ -99,8 +130,9 @@ class GUIActualiT(QtWidgets.QMainWindow):
         ns.add(text, 'Reddit')
         self.updatetab('Reddit')
 
-    def buttonClicked(self):
+    def refreshClicked(self):
         liste = mainCol.gen_mainCol()
+        liste = wdb.deleteArticlesTooOld(liste, 604800)
         self.ui.mainCol.clear()
 
         def getDate(article):

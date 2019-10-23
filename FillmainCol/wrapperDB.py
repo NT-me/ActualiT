@@ -4,7 +4,7 @@ import json
 from objects.article import Article
 from objects.source import Source
 from FillmainCol.scrapers import utils as u
-import os
+import time
 
 #PATH_DB = str(os.getcwd()+"/mainCol.json")
 #db = TinyDB(PATH_DB)
@@ -130,6 +130,24 @@ def readOriginSources(origin):
     return res
 
 
+def suprSource(ID):
+    l = list()
+    sourcesDB = TinyDB("Sdb.json")
+    artDB = TinyDB("mainCol.json")
+
+    # Delete source
+    Sitem = sourcesDB.get(Query().ID == ID)
+    l.append(Sitem.doc_id)
+    sourcesDB.remove(doc_ids=l)
+    sourcesDB.close()
+
+    # Delete Articles
+    #Sitem = sourcesDB.get(Query().ID == ID)
+    #l.append(Sitem.doc_id)
+    #sourcesDB.remove(doc_ids=l)
+    #sourcesDB.close()
+
+
 # Articles methods
 def insertArticle(A, inIAs=False):
     """
@@ -223,3 +241,22 @@ def readAllArticles():
 
     artDB.close()
     return res
+
+
+@u.MTime
+def deleteArticlesTooOld(artList, timeLimit):
+    listA = list()
+    listRES = list()
+    artDB = TinyDB("mainCol.json")
+    for art in artList:
+        if art.date < time.time() - timeLimit and type(art) == Article:
+            el = artDB.get(Query().ID == art.ID)
+            listA.append(el.doc_id)
+        else:
+            listRES.append(art)
+    try:
+        artDB.remove(doc_ids=listA)
+    except KeyError:
+        pass
+
+    return listRES
