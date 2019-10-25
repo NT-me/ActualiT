@@ -147,6 +147,14 @@ def suprSource(ID):
     #sourcesDB.remove(doc_ids=l)
     #sourcesDB.close()
 
+def modSource(ID, field, newValue):
+    sourcesDB = TinyDB("Sdb.json")
+    item_doc_id = sourcesDB.get(Query().ID == ID).doc_id
+    l = list()
+    l.append(item_doc_id)
+    sourcesDB.update({field: newValue}, doc_ids = l)
+    sourcesDB.close()
+
 
 # Articles methods
 def insertArticle(A, inIAs=False):

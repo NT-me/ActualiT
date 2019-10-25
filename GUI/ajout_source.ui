@@ -50,12 +50,17 @@
      <widget class="QTableWidget" name="tabSource">
       <column>
        <property name="text">
-        <string>Sources</string>
+        <string>Nom</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Labels</string>
+        <string>Lien</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tag</string>
        </property>
       </column>
      </widget>

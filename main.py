@@ -55,34 +55,37 @@ class GUIActualiT(QtWidgets.QMainWindow):
             self.D.tabSource.removeRow(i)
         for item in liste:
             Qitem = QtWidgets.QTableWidgetItem()
+            QitemL = QtWidgets.QTableWidgetItem()
+
             self.D.tabSource.insertRow(count)
-            Qitem.setText(item.name)
-            Qitem.setData(Qt.UserRole, item.ID)
+            Qitem.setData(Qt.UserRole, item)
+
+            # Name
+            Qitem.setText(Qitem.data(Qt.UserRole).name)
             self.D.tabSource.setItem(count, 0, Qitem)
+
+            # Link
+            QitemL.setText(Qitem.data(Qt.UserRole).link)
+            self.D.tabSource.setItem(count, 1, QitemL)
+
+            # TAG || labels
             count = + 1
 
-    def deleteSourceRSS(self):
-        if self.cellItem is not None:
-            wdb.suprSource(self.cellItem.data(Qt.UserRole))
-            self.updatetab('RSS')
-            self.cellItem = None
-
-    def deleteSourceReddit(self):
-        if self.cellItem is not None:
-            wdb.suprSource(self.cellItem.data(Qt.UserRole))
-            self.updatetab('Reddit')
-            self.cellItem = None
-
-    def deleteSourceTwitter(self):
-        if self.cellItem is not None:
-            wdb.suprSource(self.cellItem.data(Qt.UserRole))
-            self.updatetab('Twitter')
+    def rename(self):
+        if self.cellItem is not None :
+            wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "name", self.cellItem.text())
             self.cellItem = None
 
     def cellClickedMemory(self, row, column):
         self.cellItem = self.D.tabSource.item(row, 0)
 
-    def openRSSManager(self):
+    def deleteSourceInner(self, origin):
+        if self.cellItem is not None:
+            wdb.suprSource(self.cellItem.data(Qt.UserRole).ID)
+            self.updatetab(origin)
+            self.cellItem = None
+
+    def openManagerInner(self, origin):
         self.cellItem = None
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
@@ -90,45 +93,41 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.D.ajoutButton.clicked.connect(self.addRSSSource)
         self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
         self.D.supprButton.clicked.connect(self.deleteSourceRSS)
-        self.updatetab('RSS')
+        self.D.tabSource.itemChanged.connect(self.rename)
+        self.updatetab(origin)
+
+    def addSourceInner(self, origin):
+        text = self.D.addSourceLine.text()
+        self.D.addSourceLine.clear()
+        ns.add(text, origin)
+        self.updatetab(origin)
+
+    def deleteSourceRSS(self):
+        self.deleteSourceInner('RSS')
+
+    def deleteSourceReddit(self):
+        self.deleteSourceInner('Reddit')
+
+    def deleteSourceTwitter(self):
+        self.deleteSourceInner('Twitter')
+
+    def openRSSManager(self):
+        self.openManagerInner('RSS')
 
     def openTwitterManager(self):
-        self.cellItem = None
-        self.window = QtWidgets.QDialog()
-        self.D.setupUi(self.window)
-        self.window.show()
-        self.D.ajoutButton.clicked.connect(self.addTwitterSource)
-        self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
-        self.D.supprButton.clicked.connect(self.deleteSourceTwitter)
-        self.updatetab('Twitter')
+        self.openManagerInner('Twitter')
 
     def openRedditManager(self):
-        self.cellItem = None
-        self.window = QtWidgets.QDialog()
-        self.D.setupUi(self.window)
-        self.window.show()
-        self.D.ajoutButton.clicked.connect(self.addRedditSource)
-        self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
-        self.D.supprButton.clicked.connect(self.deleteSourceReddit)
-        self.updatetab('Reddit')
+        self.openManagerInner('Reddit')
 
     def addRSSSource(self):
-        text = self.D.addSourceLine.text()
-        self.D.addSourceLine.clear()
-        ns.add(text, 'RSS')
-        self.updatetab('RSS')
+        self.addSourceInner('RSS')
 
     def addTwitterSource(self):
-        text = self.D.addSourceLine.text()
-        self.D.addSourceLine.clear()
-        ns.add(text, 'Twitter')
-        self.updatetab('Twitter')
+        self.addSourceInner('Twitter')
 
     def addRedditSource(self):
-        text = self.D.addSourceLine.text()
-        self.D.addSourceLine.clear()
-        ns.add(text, 'Reddit')
-        self.updatetab('Reddit')
+        self.addSourceInner('Reddit')
 
     def refreshClicked(self):
         liste = mainCol.gen_mainCol()

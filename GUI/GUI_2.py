@@ -748,7 +748,7 @@ class Ui_MainWindow(object):
         self.toolBox = QtWidgets.QToolBox(self.verticalDock)
         self.toolBox.setObjectName("toolBox")
         self.RSS_Button = QtWidgets.QWidget()
-        self.RSS_Button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.RSS_Button.setGeometry(QtCore.QRect(0, 0, 173, 557))
         self.RSS_Button.setObjectName("RSS_Button")
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.RSS_Button)
         self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(0, 0, 171, 41))
@@ -761,7 +761,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.RSS_manage)
         self.toolBox.addItem(self.RSS_Button, "")
         self.Reddit_button = QtWidgets.QWidget()
-        self.Reddit_button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Reddit_button.setGeometry(QtCore.QRect(0, 0, 173, 557))
         self.Reddit_button.setObjectName("Reddit_button")
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.Reddit_button)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(0, 0, 171, 41))
@@ -774,7 +774,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.Reddit_manage)
         self.toolBox.addItem(self.Reddit_button, "")
         self.Twitter_button = QtWidgets.QWidget()
-        self.Twitter_button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Twitter_button.setGeometry(QtCore.QRect(0, 0, 173, 557))
         self.Twitter_button.setObjectName("Twitter_button")
         self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.Twitter_button)
         self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(0, 0, 171, 41))
@@ -787,7 +787,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.Twitter_manage)
         self.toolBox.addItem(self.Twitter_button, "")
         self.Primi_Button = QtWidgets.QWidget()
-        self.Primi_Button.setGeometry(QtCore.QRect(0, 0, 173, 541))
+        self.Primi_Button.setGeometry(QtCore.QRect(0, 0, 173, 557))
         self.Primi_Button.setObjectName("Primi_Button")
         self.verticalLayoutWidget_5 = QtWidgets.QWidget(self.Primi_Button)
         self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(0, 0, 171, 41))
@@ -796,11 +796,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.RSS_manage_4 = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
+        self.RSS_manage_4.setEnabled(False)
         self.RSS_manage_4.setObjectName("RSS_manage_4")
         self.verticalLayout_5.addWidget(self.RSS_manage_4)
         self.toolBox.addItem(self.Primi_Button, "")
         self.verticalLayout.addWidget(self.toolBox)
         self.toolButton = QtWidgets.QToolButton(self.verticalDock)
+        self.toolButton.setEnabled(False)
         self.toolButton.setObjectName("toolButton")
         self.verticalLayout.addWidget(self.toolButton)
         self.gridLayout.addWidget(self.verticalDock, 0, 0, 3, 1)
@@ -838,7 +840,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.toolBox.setCurrentIndex(2)
+        self.toolBox.setCurrentIndex(0)
         self.toolBox.layout().setSpacing(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.Reddit_manage, self.Twitter_manage)
@@ -863,5 +865,5 @@ class Ui_MainWindow(object):
         self.articleShower.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Microsoft YaHei\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'Microsoft YaHei\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Roboto\'; font-size:15pt;\"><br /></p></body></html>"))

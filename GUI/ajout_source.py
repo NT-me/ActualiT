@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ajout_source.ui'
+# Form implementation generated from reading ui file 'GUI/ajout_source.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.1
 #
@@ -30,12 +30,14 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.label)
         self.tabSource = QtWidgets.QTableWidget(self.verticalLayoutWidget)
         self.tabSource.setObjectName("tabSource")
-        self.tabSource.setColumnCount(2)
+        self.tabSource.setColumnCount(3)
         self.tabSource.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tabSource.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.tabSource.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tabSource.setHorizontalHeaderItem(2, item)
         self.verticalLayout.addWidget(self.tabSource)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem)
@@ -62,8 +64,10 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Ajout de source"))
         item = self.tabSource.horizontalHeaderItem(0)
-        item.setText(_translate("Dialog", "Sources"))
+        item.setText(_translate("Dialog", "Nom"))
         item = self.tabSource.horizontalHeaderItem(1)
-        item.setText(_translate("Dialog", "Labels"))
+        item.setText(_translate("Dialog", "Lien"))
+        item = self.tabSource.horizontalHeaderItem(2)
+        item.setText(_translate("Dialog", "Tag"))
         self.ajoutButton.setText(_translate("Dialog", "Ajout"))
         self.supprButton.setText(_translate("Dialog", "Suppresion"))
