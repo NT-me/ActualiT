@@ -752,7 +752,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
@@ -779,6 +779,15 @@ QTreeWidget::branch:open:has-children:!has-siblings {
        </item>
        <item>
         <widget class="QToolBox" name="toolBox">
+         <property name="font">
+          <font>
+           <family>Microsoft YaHei</family>
+           <italic>false</italic>
+          </font>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -791,7 +800,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>557</height>
+            <height>214</height>
            </rect>
           </property>
           <attribute name="label">
@@ -823,7 +832,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>557</height>
+            <height>214</height>
            </rect>
           </property>
           <attribute name="label">
@@ -855,7 +864,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>557</height>
+            <height>214</height>
            </rect>
           </property>
           <attribute name="label">
@@ -887,7 +896,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
             <x>0</x>
             <y>0</y>
             <width>173</width>
-            <height>557</height>
+            <height>214</height>
            </rect>
           </property>
           <attribute name="label">
@@ -904,9 +913,9 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QPushButton" name="RSS_manage_4">
+             <widget class="QPushButton" name="NAC_manage">
               <property name="enabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="text">
                <string>Manage</string>
@@ -917,6 +926,19 @@ QTreeWidget::branch:open:has-children:!has-siblings {
           </widget>
          </widget>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QToolButton" name="toolButton">
@@ -983,7 +1005,7 @@ QTreeWidget::branch:open:has-children:!has-siblings {
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto'; font-size:15pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="openExternalLinks">
@@ -1002,7 +1024,7 @@ p, li { white-space: pre-wrap; }
  <tabstops>
   <tabstop>Reddit_manage</tabstop>
   <tabstop>Twitter_manage</tabstop>
-  <tabstop>RSS_manage_4</tabstop>
+  <tabstop>NAC_manage</tabstop>
   <tabstop>toolButton</tabstop>
   <tabstop>RSS_manage</tabstop>
   <tabstop>refreshButton</tabstop>

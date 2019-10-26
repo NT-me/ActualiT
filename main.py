@@ -9,6 +9,7 @@ import time
 from threading import Thread
 from GUI.GUI_2 import Ui_MainWindow
 from GUI.ajout_source import Ui_Dialog
+from GUI.NACManageDialog import Ui_Dialog as NAC_Dialog
 import sys
 from FillmainCol.scrapers import utils as u
 from FillmainCol import wrapperDB as wdb
@@ -42,11 +43,13 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.setWindowTitle("ActualiT")
         self.setWindowIcon(QIcon('icon.png'))
         self.D = Ui_Dialog()
+        self.NAC_D = NAC_Dialog()
         self.ui.refreshButton.clicked.connect(self.refreshClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
         self.ui.RSS_manage.clicked.connect(self.openRSSManager)
         self.ui.Twitter_manage.clicked.connect(self.openTwitterManager)
         self.ui.Reddit_manage.clicked.connect(self.openRedditManager)
+        self.ui.NAC_manage.clicked.connect(self.openNACManager)
 
     def updatetab(self, origin):
         liste = wdb.readOriginSources(origin)
@@ -73,7 +76,15 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def rename(self):
         if self.cellItem is not None :
-            wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "name", self.cellItem.text())
+            print(self.cellItem.column())
+            if self.cellItem.column() == 0:
+                wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "name", self.cellItem.text())
+            #elif self.cellItem.column() == 1:
+            #    wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "link", self.cellItem.text())
+            #elif self.cellItem.column == 2:
+            #    wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "labels", self.cellItem.text())
+
+
             self.cellItem = None
 
     def cellClickedMemory(self, row, column):
@@ -95,6 +106,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.D.supprButton.clicked.connect(self.deleteSourceRSS)
         self.D.tabSource.itemChanged.connect(self.rename)
         self.updatetab(origin)
+
+    def openNACManager(self):
+        self.window = QtWidgets.QDialog()
+        self.NAC_D.setupUi(self.window)
+        self.window.show()
 
     def addSourceInner(self, origin):
         text = self.D.addSourceLine.text()
