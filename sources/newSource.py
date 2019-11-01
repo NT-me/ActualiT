@@ -1,6 +1,7 @@
 from objects.source import Source
 from FillmainCol import wrapperDB as wdb
 
+
 def URLPurifier(str):
     # 1st point
     str = str[str.find('.')+1:]
@@ -8,6 +9,7 @@ def URLPurifier(str):
     str = str[:str.find('.')]
 
     return str
+
 
 def add(url, origin):
     ID = hash(url)

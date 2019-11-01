@@ -52,6 +52,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui.NAC_manage.clicked.connect(self.openNACManager)
 
     def updatetab(self, origin):
+        self.cellItem = None
         liste = wdb.readOriginSources(origin)
         count = 0
         for i in reversed(range(self.D.tabSource.rowCount())):
@@ -76,14 +77,8 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def rename(self):
         if self.cellItem is not None :
-            print(self.cellItem.column())
             if self.cellItem.column() == 0:
                 wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "name", self.cellItem.text())
-            #elif self.cellItem.column() == 1:
-            #    wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "link", self.cellItem.text())
-            #elif self.cellItem.column == 2:
-            #    wdb.modSource(self.cellItem.data(Qt.UserRole).ID, "labels", self.cellItem.text())
-
 
             self.cellItem = None
 
@@ -93,17 +88,19 @@ class GUIActualiT(QtWidgets.QMainWindow):
     def deleteSourceInner(self, origin):
         if self.cellItem is not None:
             wdb.suprSource(self.cellItem.data(Qt.UserRole).ID)
-            self.updatetab(origin)
             self.cellItem = None
+            self.updatetab(origin)
 
     def openManagerInner(self, origin):
+        add_func_name = "add" + str(origin) + "Source"
+        del_func_name = "delete" + "Source" + str(origin)
         self.cellItem = None
         self.window = QtWidgets.QDialog()
         self.D.setupUi(self.window)
         self.window.show()
-        self.D.ajoutButton.clicked.connect(self.addRSSSource)
+        self.D.ajoutButton.clicked.connect(getattr(self, add_func_name))
         self.D.tabSource.cellClicked.connect(self.cellClickedMemory)
-        self.D.supprButton.clicked.connect(self.deleteSourceRSS)
+        self.D.supprButton.clicked.connect(getattr(self, del_func_name))
         self.D.tabSource.itemChanged.connect(self.rename)
         self.updatetab(origin)
 
@@ -117,15 +114,6 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.D.addSourceLine.clear()
         ns.add(text, origin)
         self.updatetab(origin)
-
-    def deleteSourceRSS(self):
-        self.deleteSourceInner('RSS')
-
-    def deleteSourceReddit(self):
-        self.deleteSourceInner('Reddit')
-
-    def deleteSourceTwitter(self):
-        self.deleteSourceInner('Twitter')
 
     def openRSSManager(self):
         self.openManagerInner('RSS')
@@ -144,6 +132,15 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def addRedditSource(self):
         self.addSourceInner('Reddit')
+
+    def deleteSourceRSS(self):
+        self.deleteSourceInner('RSS')
+
+    def deleteSourceReddit(self):
+        self.deleteSourceInner('Reddit')
+
+    def deleteSourceTwitter(self):
+        self.deleteSourceInner('Twitter')
 
     def refreshClicked(self):
         liste = mainCol.gen_mainCol()
