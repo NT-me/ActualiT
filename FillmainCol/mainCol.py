@@ -110,7 +110,7 @@ def parseFeed():
 	print("===- Feed START -===")
 	for i in articleFEED:
 		for item in articleFEED[i]:
-			titre = item["title"]
+			titre = withoutHTML(item["title"])
 			try:
 				auteur = item["author"]
 			except:
@@ -118,7 +118,7 @@ def parseFeed():
 			info_source = item["source"]
 			lien = item["link"]
 			try:
-				resume = item["summary"]
+				resume = withoutHTML(item["summary"])
 			except:
 				resume = None
 			try:
@@ -284,6 +284,7 @@ def all_parse():
 	while queueOut.empty() is False:
 		ArtList = ArtList + queueOut.get()
 
+	print(len(ArtList))
 	wdb.insertArticles(ArtList)
 
 
@@ -291,4 +292,5 @@ def all_parse():
 def gen_mainCol():
 	all_ask()
 	all_parse()
+
 	return wdb.readAllArticles()

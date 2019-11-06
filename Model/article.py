@@ -19,9 +19,8 @@ def model(A):
                         pass
                 line('h1', A.titre)
                 if A.auteur is not None:
-                    line('b', A.auteur)
-                else:
-                    line('b', A.info_source)
+                    line('b', A.auteur + "\n")
+                line('b', A.info_source)
 
                 with tag('div', klass = 'description'):
                     text(A.resume)

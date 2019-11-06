@@ -1,7 +1,9 @@
 import feedparser as fp
 import json
 from time import mktime
+import time
 from . import utils as u
+import random
 from FillmainCol import wrapperDB as wdb
 
 
@@ -24,7 +26,10 @@ def askFeeds():
 			for article in res[inc]:
 				article["from"] = "Feed RSS"
 				article["source"] = item.name
-				article["published"] = mktime(article["published_parsed"])
+				try:
+					article["published"] = mktime(article["published_parsed"])
+				except:
+					article["published"] = time.time() + random.randint(1, 100)
 			inc = inc + 1
 
 	with open(PATH_FileRes, 'w') as f:

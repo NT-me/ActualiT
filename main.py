@@ -149,7 +149,6 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
         def getDate(article):
             return article.date
-
         liste = sorted(liste, key=getDate, reverse=True)
         for item in liste:
             date = str(time.ctime(item.date))
