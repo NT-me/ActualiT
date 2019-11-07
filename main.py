@@ -77,7 +77,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("ActualiT")
-        self.setWindowIcon(QIcon('icon.png'))
+        self.setWindowIcon(QIcon('icon.ico'))
         self.D = Ui_Dialog()
         self.NAC_D = NAC_Dialog()
         articlesFromDB(self)
@@ -210,7 +210,9 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QIcon('icon.ico'))
     #qtmodern.styles.dark(app)
     w = GUIActualiT()
     w.show()
+    w.setWindowIcon(QIcon('icon.ico'))
     sys.exit(app.exec_())
