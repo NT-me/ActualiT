@@ -34,6 +34,26 @@ def MainColWorkFunc():
     MCW.join()
 
 
+class refreshTread(Thread):
+    def __init__(self, GUI_C):
+        Thread.__init__(self)
+        self.GUI_C = GUI_C
+
+    def run(self):
+        liste = mainCol.gen_mainCol()
+        self.GUI_C.ui.mainCol.clear()
+
+        def getDate(article):
+            return article.date
+        liste = sorted(liste, key=getDate, reverse=True)
+        for item in liste:
+            date = str(time.ctime(item.date))
+            Qitem = QtWidgets.QListWidgetItem()
+            Qitem.setText(str(item.titre)+' | '+date)
+            Qitem.setData(Qt.UserRole, item.ID)
+            self.GUI_C.ui.mainCol.addItem(Qitem)
+
+
 class GUIActualiT(QtWidgets.QMainWindow):
     cellItem = None
     def __init__(self, title="Default", parent=None):
@@ -143,19 +163,8 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.deleteSourceInner('Twitter')
 
     def refreshClicked(self):
-        liste = mainCol.gen_mainCol()
-        #liste = wdb.deleteArticlesTooOld(liste, 604800)
-        self.ui.mainCol.clear()
-
-        def getDate(article):
-            return article.date
-        liste = sorted(liste, key=getDate, reverse=True)
-        for item in liste:
-            date = str(time.ctime(item.date))
-            Qitem = QtWidgets.QListWidgetItem()
-            Qitem.setText(str(item.titre)+' | '+date)
-            Qitem.setData(Qt.UserRole, item.ID)
-            self.ui.mainCol.addItem(Qitem)
+        RT = refreshTread(self)
+        RT.start()
 
     @u.MTime
     def item_click(self, item):

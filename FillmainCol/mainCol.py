@@ -268,7 +268,6 @@ class fillDbArt_T(Thread):
 
 	def run(self):
 		list = self.queueIn.get()
-		#list = wdb.deleteArticlesTooOld(list, 604800)
 		wdb.insertArticles(list)
 
 

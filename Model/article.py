@@ -18,9 +18,12 @@ def model(A):
                     except :
                         pass
                 line('h1', A.titre)
-                if A.auteur is not None:
-                    line('b', A.auteur + "\n")
-                line('b', A.info_source)
+                with tag('b', klass = 'SourceAndAuthor'):
+                    if A.auteur is not None:
+                        text(A.auteur + "  |  ")
+                    text(A.info_source)
+
+                    doc.stag('br')
 
                 with tag('div', klass = 'description'):
                     text(A.resume)
