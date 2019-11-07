@@ -144,7 +144,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def refreshClicked(self):
         liste = mainCol.gen_mainCol()
-        liste = wdb.deleteArticlesTooOld(liste, 604800)
+        #liste = wdb.deleteArticlesTooOld(liste, 604800)
         self.ui.mainCol.clear()
 
         def getDate(article):

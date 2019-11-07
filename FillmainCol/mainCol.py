@@ -261,6 +261,16 @@ class parseTwitter_T(Thread):
 		self.queueOut.put(parseTwitter())
 
 
+class fillDbArt_T(Thread):
+	def __init__(self, queueIn):
+		super(fillDbArt_T, self).__init__()
+		self.queueIn = queueIn
+
+	def run(self):
+		list = self.queueIn.get()
+		wdb.insertArticles(list)
+		wdb.deleteArticlesTooOld(list, 604800)
+
 def all_parse():
 	queueOut = Queue()
 
@@ -285,12 +295,19 @@ def all_parse():
 		ArtList = ArtList + queueOut.get()
 
 	print(len(ArtList))
-	wdb.insertArticles(ArtList)
+
+	queueIn = Queue()
+	queueIn.put(ArtList)
+	Fdb = fillDbArt_T(queueIn)
+	#Fdb.daemon = True
+	Fdb.start()
+
+	return ArtList
 
 
 @u.MTime
 def gen_mainCol():
 	all_ask()
-	all_parse()
+	return all_parse()
 
-	return wdb.readAllArticles()
+	#return wdb.readAllArticles()

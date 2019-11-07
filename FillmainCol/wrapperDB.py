@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from tinydb import TinyDB, Query, where
+from tinydb_smartcache import SmartCacheTable
 import json
 from objects.article import Article
 from objects.source import Source
@@ -13,7 +14,6 @@ import time
 
 artDB = TinyDB("mainCol.json")
 sourcesDB = TinyDB("Sdb.json")
-
 
 # Source methods
 def insertSource(S):
