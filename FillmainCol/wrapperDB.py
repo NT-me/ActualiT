@@ -204,9 +204,10 @@ def readArticle(ID):
     return -> The Article requested
     """
     # 1st search in the globallist
-    for item in globalArtList:
-        if item.ID == ID:
-            return item
+    if globalArtList is not None:
+        for item in globalArtList:
+            if item.ID == ID:
+                return item
 
     # 2nd search in db
     artDB = TinyDB("mainCol.json")

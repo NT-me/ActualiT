@@ -34,6 +34,20 @@ def MainColWorkFunc():
     MCW.join()
 
 
+def articlesFromDB(GUI_C):
+    liste = wdb.readAllArticles()
+    GUI_C.ui.mainCol.clear()
+
+    def getDate(article):
+        return article.date
+    liste = sorted(liste, key=getDate, reverse=True)
+    for item in liste:
+        date = str(time.ctime(item.date))
+        Qitem = QtWidgets.QListWidgetItem()
+        Qitem.setText(str(item.titre)+' | '+date)
+        Qitem.setData(Qt.UserRole, item.ID)
+        GUI_C.ui.mainCol.addItem(Qitem)
+
 class refreshTread(Thread):
     def __init__(self, GUI_C):
         Thread.__init__(self)
@@ -56,6 +70,8 @@ class refreshTread(Thread):
 
 class GUIActualiT(QtWidgets.QMainWindow):
     cellItem = None
+    MCitem = None
+
     def __init__(self, title="Default", parent=None):
         super(GUIActualiT, self).__init__(parent)
         self.ui = Ui_MainWindow()
@@ -64,12 +80,17 @@ class GUIActualiT(QtWidgets.QMainWindow):
         self.setWindowIcon(QIcon('icon.png'))
         self.D = Ui_Dialog()
         self.NAC_D = NAC_Dialog()
+        articlesFromDB(self)
         self.ui.refreshButton.clicked.connect(self.refreshClicked)
         self.ui.mainCol.itemClicked.connect(self.item_click)
+        self.ui.mainCol.itemActivated.connect(self.item_click)
         self.ui.RSS_manage.clicked.connect(self.openRSSManager)
         self.ui.Twitter_manage.clicked.connect(self.openTwitterManager)
         self.ui.Reddit_manage.clicked.connect(self.openRedditManager)
         self.ui.NAC_manage.clicked.connect(self.openNACManager)
+
+    def test(self):
+        print('hey\n')
 
     def updatetab(self, origin):
         self.cellItem = None
@@ -168,6 +189,7 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     @u.MTime
     def item_click(self, item):
+        self.MCitem = item
         id = item.data(Qt.UserRole)
         if id != 0:
             article = wdb.readArticle(id)
