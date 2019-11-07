@@ -14,6 +14,8 @@ import time
 
 artDB = TinyDB("mainCol.json")
 sourcesDB = TinyDB("Sdb.json")
+globalArtList = None
+
 
 # Source methods
 def insertSource(S):
@@ -201,6 +203,12 @@ def readArticle(ID):
     ID -> article object
     return -> The Article requested
     """
+    # 1st search in the globallist
+    for item in globalArtList:
+        if item.ID == ID:
+            return item
+
+    # 2nd search in db
     artDB = TinyDB("mainCol.json")
     A = Article()
     DictArt = artDB.search(Query().ID == ID)
@@ -253,18 +261,9 @@ def readAllArticles():
 
 @u.MTime
 def deleteArticlesTooOld(artList, timeLimit):
-    listA = list()
     listRES = list()
-    artDB = TinyDB("mainCol.json")
     for art in artList:
-        if art.date < time.time() - timeLimit and type(art) == Article:
-            el = artDB.get(Query().ID == art.ID)
-            listA.append(el.doc_id)
-        else:
+        if art.date > time.time() - timeLimit and type(art) == Article:
             listRES.append(art)
-    try:
-        artDB.remove(doc_ids=listA)
-    except KeyError:
-        pass
 
     return listRES

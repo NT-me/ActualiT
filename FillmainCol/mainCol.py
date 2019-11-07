@@ -268,8 +268,9 @@ class fillDbArt_T(Thread):
 
 	def run(self):
 		list = self.queueIn.get()
+		#list = wdb.deleteArticlesTooOld(list, 604800)
 		wdb.insertArticles(list)
-		wdb.deleteArticlesTooOld(list, 604800)
+
 
 def all_parse():
 	queueOut = Queue()
@@ -297,9 +298,10 @@ def all_parse():
 	print(len(ArtList))
 
 	queueIn = Queue()
+	ArtList = wdb.deleteArticlesTooOld(ArtList, 604800)
 	queueIn.put(ArtList)
 	Fdb = fillDbArt_T(queueIn)
-	#Fdb.daemon = True
+	# Fdb.daemon = True
 	Fdb.start()
 
 	return ArtList
@@ -308,6 +310,8 @@ def all_parse():
 @u.MTime
 def gen_mainCol():
 	all_ask()
-	return all_parse()
+	res = all_parse()
+	wdb.globalArtList = res
+	return res
 
 	#return wdb.readAllArticles()
