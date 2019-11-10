@@ -50,13 +50,26 @@ def articlesFromDB(GUI_C):
         GUI_C.ui.mainCol.addItem(Qitem)
 
 class refreshTread(Thread):
-    def __init__(self, queueOut):
+    def __init__(self, queueOut, GUI_C):
         Thread.__init__(self)
         self.queueOut = queueOut
+        self.ui = GUI_C
 
     def run(self):
-        liste = mainCol.gen_mainCol()
-        self.queueOut.put(liste)
+        mainCol.gen_mainCol()
+        liste = wdb.deleteArticlesTooOld(wdb.readAllArticles(), 604800)
+        #self.queueOut.put(liste)
+        self.ui.mainCol.clear()
+
+        def getDate(article):
+            return article.date
+        liste = sorted(liste, key=getDate, reverse=True)
+        for item in liste:
+            date = str(time.ctime(item.date))
+            Qitem = QtWidgets.QListWidgetItem()
+            Qitem.setText(str(item.titre)+' | '+date)
+            Qitem.setData(Qt.UserRole, item.ID)
+            self.ui.mainCol.addItem(Qitem)
 
 
 class GUIActualiT(QtWidgets.QMainWindow):
@@ -176,21 +189,11 @@ class GUIActualiT(QtWidgets.QMainWindow):
 
     def refreshClicked(self):
         queueOut = Queue()
-        RT = refreshTread(queueOut)
+        RT = refreshTread(queueOut, self.ui)
         RT.start()
 
-        liste = queueOut.get()
-        self.ui.mainCol.clear()
+        #liste = queueOut.get()
 
-        def getDate(article):
-            return article.date
-        liste = sorted(liste, key=getDate, reverse=True)
-        for item in liste:
-            date = str(time.ctime(item.date))
-            Qitem = QtWidgets.QListWidgetItem()
-            Qitem.setText(str(item.titre)+' | '+date)
-            Qitem.setData(Qt.UserRole, item.ID)
-            self.ui.mainCol.addItem(Qitem)
 
     @u.MTime
     def item_click(self, item):
