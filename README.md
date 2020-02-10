@@ -16,8 +16,6 @@ ActualiT is there to help solve this problem, it will retrieve for you the news 
 
 Then it is up to you to settle for the brief summary provided or go to the site from which the information comes for more details.
 
-Translated with www.DeepL.com/Translator
-
 ### Install
 
 #### Prerequisites
